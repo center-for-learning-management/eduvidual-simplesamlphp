@@ -173,6 +173,8 @@ jobs:
         if: steps.changed-files-specific.outputs.any_changed == 'true'
         uses: actions/github-script@v6
         with:
+          # Token has to be generated on a user account that controls the docs-repository.
+          # The _only_ scope to select is "Access public repositories", nothing more.
           github-token: ${{ secrets.PAT_TOKEN }}
           script: |
             await github.rest.actions.createWorkflowDispatch({
