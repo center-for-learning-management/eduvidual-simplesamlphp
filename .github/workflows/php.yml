@@ -170,7 +170,7 @@ jobs:
             **/*.md
 
       - name: Run docs build if any of markdown-files have changed
-        if: steps.changed-files-specific.outputs.any_changed == 'true'
+        if: steps.changed-files-specific.outputs.any_changed == 'true' && contains('refs/heads/master refs/heads/simplesamlphp-', github.ref)
         uses: actions/github-script@v6
         with:
           # Token has to be generated on a user account that controls the docs-repository.
