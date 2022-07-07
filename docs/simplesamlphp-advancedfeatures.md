@@ -1,23 +1,18 @@
-SimpleSAMLphp Advanced Features
-===============================
+# SimpleSAMLphp Advanced Features
 
 [TOC]
 
-SimpleSAMLphp documentation
----------------------------
+## SimpleSAMLphp documentation
 
 This document is part of the SimpleSAMLphp documentation suite.
 
 - [List of all SimpleSAMLphp documentation](http://simplesamlphp.org/docs)
 
-
 This document assumes that you already have a installation of
 SimpleSAMLphp running, configured and working. This is the next
 step :)
 
-
-Bridging between protocols
---------------------------
+## Bridging between protocols
 
 A bridge between two protocols is built using both an IdP and an SP, connected together.
 To let a SAML 2.0 SP talk to a SAML 1.1 IdP, you build a SimpleSAMLphp bridge from a SAML 2.0 IdP and a SAML 1.1 SP.
@@ -25,7 +20,7 @@ The SAML 2.0 SP talks to the SAML 2.0 IdP, which hands the request over to the S
 
 If you have followed the instructions for setting up an SP, and have configured an authentication source, all you need to do is to add that authentication source to the IdP.
 
-**Example of bridge configuration**
+### Example of bridge configuration
 
 In `metadata/saml20-idp-hosted.php`:
 
@@ -38,26 +33,20 @@ In `config/authsources.php`:
     ],
 
 
-
-Attribute control
------------------
+## Attribute control
 
 Filtering, mapping, etc can be performed by using existing or create new *Authentication Processing Filters*. For more information, read:
 
   * [Authentication Processing Filters in SimpleSAMLphp](simplesamlphp-authproc)
 
 
-
-Automatic update of SAML 2.0 Metadata XML from HTTPS
-----------------------------------------------------
+## Automatic update of SAML 2.0 Metadata XML from HTTPS
 
 The `metarefresh` module is the preferred method for doing this.
 Please see the [metarefresh documentation](/docs/contrib_modules/metarefresh/simplesamlphp-automated_metadata).
 
 
-
-Using simpleSAMLphp on a web server requiring the use of a web proxy
---------------------------------------------------------------------
+## Using simpleSAMLphp on a web server requiring the use of a web proxy
 
 Some modules in simpleSAMLphp may require fetching HTTP/HTTPS content from external websites (e.g. the metarefresh module needs to fetch the metadata from an external source).
 
@@ -66,18 +55,14 @@ simpleSAMLphp can be configured to send HTTP/S requests via such a proxy. The pr
 The default is not to use a proxy ('proxy' = null) and no username and password are used ('proxy.auth' = false).
 
 
-
-Auth MemCookie
---------------
+## Auth MemCookie
 
 [Auth MemCookie](http://authmemcookie.sourceforge.net/) support is deprecated in the standard code base of SimpleSAMLphp
  and will no longer be available starting in SimpleSAMLphp 2.0. Please use the new
  [memcookie module](https://github.com/simplesamlphp/simplesamlphp-module-memcookie) instead.
 
 
-
-Metadata signing
-----------------
+## Metadata signing
 
 SimpleSAMLphp supports signing of the metadata it generates. Metadata signing is configured by four options:
 
@@ -98,17 +83,13 @@ These options can be configured globally in the `config/config.php`-file, or per
 
 There is also an additional fallback for the private key and the certificate. If `metadata.sign.privatekey` and `metadata.sign.certificate` isn't configured, SimpleSAMLphp will use the `privatekey`, `privatekey_pass` and `certificate` options in the metadata for the SP/IdP.
 
-
-
-
-Session checking function
--------------------------
+## Session checking function
 
 Optional session checking function, called on session init and loading, defined with 'session.check_function' in config.php.
 
 Example code for the function with GeoIP country check:
 
-
+```php
     public static function checkSession($session, $init = FALSE) {
         $data_type = 'example:check_session';
         $data_key = 'remote_addr';
@@ -147,12 +128,9 @@ Example code for the function with GeoIP country check:
 
         return FALSE;
     }
+```
 
-
-
-
-Support
--------
+## Support
 
 If you need help to make this work, or want to discuss
 SimpleSAMLphp with other users of the software, you are fortunate:

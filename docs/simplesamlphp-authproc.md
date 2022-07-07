@@ -45,10 +45,10 @@ The configuration of *Auth Proc Filters* is a list of filters with priority as *
 		20 => 'core:TargetedID',
 		50 => 'core:AttributeLimit',
 		90 => [
-			'class' 	=> 'consent:Consent', 
-			'store' 	=> 'consent:Cookie', 
-			'focus' 	=> 'yes', 
-			'checked' 	=> TRUE
+			'class' => 'consent:Consent', 
+			'store'	=> 'consent:Cookie', 
+			'focus'	=> 'yes', 
+			'checked' => TRUE
 		],
 	],
 
@@ -73,10 +73,10 @@ This is analogous to:
 Some *Auth Proc Filters* have optional or required *parameters*. To send parameters to *Auth Proc Filters*, you need to choose the second of the two alernatives above. Here is an example of provided parameters to the consent module:
 
 	90 => [
-		'class' 	=> 'consent:Consent', 
-		'store' 	=> 'consent:Cookie', 
-		'focus' 	=> 'yes', 
-		'checked' 	=> TRUE
+		'class' => 'consent:Consent', 
+		'store'	=> 'consent:Cookie', 
+		'focus'	=> 'yes', 
+		'checked' => TRUE
 	],
 
 
@@ -112,41 +112,38 @@ Filters can be added both in `hosted` and `remote` metadata. Here is an example 
 
 The example above is in `saml20-idp-hosted`.
 
-
-
 Auth Proc Filters included in the SimpleSAMLphp distribution
 ------------------------------------------------------------
 
 The following filters are included in the SimpleSAMLphp distribution:
 
-- [`core:AttributeAdd`](./core:authproc_attributeadd): Add attributes to the response.
-- [`core:AttributeCopy`](./core:authproc_attributecopy): Copy existing attributes to the response.
-- [`core:AttributeAlter`](./core:authproc_attributealter): Do search-and-replace on attributevalues.
-- [`core:AttributeLimit`](./core:authproc_attributelimit): Limit the attributes in the response.
-- [`core:AttributeMap`](./core:authproc_attributemap): Change the name of the attributes.
-- [`core:AttributeValueMap`](./core:authproc_attributevaluemap): Map attribute values to new values and attribute name.
-- [`core:Cardinality`](./core:authproc_cardinality): Ensure the number of attribute values is within the specified multiplicity.
-- [`core:CardinalitySingle`](./core:authproc_cardinalitysingle): Ensure the correct cardinality of single-valued attributes.
-- [`core:GenerateGroups`](./core:authproc_generategroups): Generate a `group` attribute for the user.
-- [`core:LanguageAdaptor`](./core:authproc_languageadaptor): Transfering language setting from IdP to SP.
-- [`core:PHP`](./core:authproc_php): Modify attributes with custom PHP code.
-- [`core:ScopeAttribute`](./core:authproc_scopeattribute): Add scope to attribute.
-- [`core:ScopeFromAttribute`](./core:authproc_scopefromattribute): Create a new attribute based on the scope on a different attribute.
-- [`core:StatisticsWithAttribute`](./core:authproc_statisticswithattribute): Create a statistics logentry.
-- [`core:TargetedID`](./core:authproc_targetedid): Generate the `eduPersonTargetedID` attribute.
-- [`core:WarnShortSSOInterval`](./core:authproc_warnshortssointerval): Give a warning if the user logs into the same SP twice within a few seconds.
-- [`saml:AttributeNameID`](./saml:nameid): Generate custom NameID with the value of an attribute.
-- [`saml:AuthnContextClassRef`](./saml:authproc_authncontextclassref): Set the authentication context in the response.
-- [`saml:ExpectedAuthnContextClassRef`](./saml:authproc_expectedauthncontextclassref): Verify the user's authentication context.
-- [`saml:FilterScopes`](./saml:filterscopes): Filter attribute values with scopes forbidden for an IdP.
-- [`saml:NameIDAttribute`](./saml:nameidattribute): Create an attribute based on the NameID we receive from the IdP.
-- [`saml:PersistentNameID`](./saml:nameid): Generate persistent NameID from an attribute.
-- [`saml:PersistentNameID2TargetedID`](./saml:nameid): Store persistent NameID as eduPersonTargetedID.
-- [`saml:TransientNameID`](./saml:nameid): Generate transient NameID.
+* [`core:AttributeAdd`](./core:authproc_attributeadd): Add attributes to the response.
+* [`core:AttributeCopy`](./core:authproc_attributecopy): Copy existing attributes to the response.
+* [`core:AttributeAlter`](./core:authproc_attributealter): Do search-and-replace on attributevalues.
+* [`core:AttributeLimit`](./core:authproc_attributelimit): Limit the attributes in the response.
+* [`core:AttributeMap`](./core:authproc_attributemap): Change the name of the attributes.
+* [`core:AttributeValueMap`](./core:authproc_attributevaluemap): Map attribute values to new values and attribute name.
+* [`core:Cardinality`](./core:authproc_cardinality): Ensure the number of attribute values is within the specified multiplicity.
+* [`core:CardinalitySingle`](./core:authproc_cardinalitysingle): Ensure the correct cardinality of single-valued attributes.
+* [`core:GenerateGroups`](./core:authproc_generategroups): Generate a `group` attribute for the user.
+* [`core:LanguageAdaptor`](./core:authproc_languageadaptor): Transfering language setting from IdP to SP.
+* [`core:PHP`](./core:authproc_php): Modify attributes with custom PHP code.
+* [`core:ScopeAttribute`](./core:authproc_scopeattribute): Add scope to attribute.
+* [`core:ScopeFromAttribute`](./core:authproc_scopefromattribute): Create a new attribute based on the scope on a different attribute.
+* [`core:StatisticsWithAttribute`](./core:authproc_statisticswithattribute): Create a statistics logentry.
+* [`core:TargetedID`](./core:authproc_targetedid): Generate the `eduPersonTargetedID` attribute.
+* [`core:WarnShortSSOInterval`](./core:authproc_warnshortssointerval): Give a warning if the user logs into the same SP twice within a few seconds.
+* [`saml:AttributeNameID`](./saml:nameid): Generate custom NameID with the value of an attribute.
+* [`saml:AuthnContextClassRef`](./saml:authproc_authncontextclassref): Set the authentication context in the response.
+* [`saml:ExpectedAuthnContextClassRef`](./saml:authproc_expectedauthncontextclassref): Verify the user's authentication context.
+* [`saml:FilterScopes`](./saml:filterscopes): Filter attribute values with scopes forbidden for an IdP.
+* [`saml:NameIDAttribute`](./saml:nameidattribute): Create an attribute based on the NameID we receive from the IdP.
+* [`saml:PersistentNameID`](./saml:nameid): Generate persistent NameID from an attribute.
+* [`saml:PersistentNameID2TargetedID`](./saml:nameid): Store persistent NameID as eduPersonTargetedID.
+* [`saml:TransientNameID`](./saml:nameid): Generate transient NameID.
 
 See the [Third-party modules](https://simplesamlphp.org/modules) page on the SimpleSAMLphp website
 for externally hosted modules that may provide a processing filter.
-
 
 Writing your own Auth Proc Filter
 ---------------------------------
