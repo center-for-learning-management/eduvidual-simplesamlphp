@@ -199,9 +199,9 @@ Released 2019-11-26
 
 Released 2019-11-26
 
- * Fixed an issue that prevented custom themes from working (#1240).
- * Fixed an issue with translations in the discovery service (#1244).
- * Fixed an issue with schema validation.
+* Fixed an issue that prevented custom themes from working (#1240).
+* Fixed an issue with translations in the discovery service (#1244).
+* Fixed an issue with schema validation.
 
 ## Version 1.18.0
 
@@ -460,7 +460,7 @@ Released 2018-09-06
 * Updated Spanish translation.
 * Improvements to documentation, testsuite, code quality and coding style.
 
-### New features
+`New features`
 
 * Added support for SAML "Enhanced Client or Proxy" (ECP) protocol,
   IdP side with HTTP Basic Authentication as authentication method.
@@ -594,7 +594,7 @@ Released 2018-01-31
 
 Released 2018-01-12
 
-### Bug fixes
+`Bug fixes`
 
 * AuthX509 error messages were broken.
 * Properly calculate supported protocols based on config.
@@ -608,7 +608,7 @@ Released 2018-01-12
 
 Released 2017-11-20
 
-### New features
+`New features`
 
 * Added support for authenticated web proxies with the `proxy.auth` setting.
 * Added new `AttributeValueMap` authproc filter.
@@ -639,7 +639,7 @@ Released 2017-11-20
 * Updated Greek, Polish, Traditional Chinese and Spanish translations and
   added Afrikaans.
 
-### Bug fixes
+`Bug fixes`
 
 * The deprecated OpenIdP has been removed from the metadata template.
 * Trailing slash is no longer required in `baseurlpath`.
@@ -649,7 +649,7 @@ Released 2017-11-20
 * Fixed a bug in the Redis store that could lead to incorrect
   _duplicate assertion_ errors.
 
-### API and user interface
+`API and user interface`
 
 * Updated to Xmlseclibs 3.0.
   Minimum PHP version is now 5.4, mcrypt requirement dropped.
@@ -915,7 +915,7 @@ Released 2016-02-15
 * Enforced admin access to the metadata converter tool.
 * Changed `xmlseclibs` dependency to point to `robrichards/xmlseclibs` version 1.4.1.
 
-### New features
+`New features`
 
 * Allow setting the location of the configuration directory with an environment variable.
 * Added support for the Metadata Query Protocol by means of the new MDX metadata storage handler.
@@ -931,7 +931,7 @@ Released 2016-02-15
 * Added attribute definitions for schacGender (schac), sisSchoolGrade and sisLegalGuardianFor (skolfederation.se).
 * Attributes required in metadata are now taken into account when parsing.
 
-### Bug fixes
+`Bug fixes`
 
 * Fixed an issue with friendly names in the attributes released.
 * Fixed an issue with memcache that would result in a push for every fetch, when several servers configured.
@@ -949,7 +949,7 @@ Released 2016-02-15
 * Fixed an issue that prevented certain metadata signatures to be verified (fixed upstream in `xmlseclibs`).
 * Other bug fixes and numerous documentation enhancements.
 
-### API and user interface
+`API and user interface`
 
 * Added a new and simple database class to serve as PDO interface for all the database needs.
 * Added the possibility to copy metadata and other elements by clicking a button in the web interface.
@@ -1187,7 +1187,7 @@ Released 2013-06-05.
 * Workaround for SSL SNI extension not being correctly set.
 * New language cookie and parameter config options.
 * Add 'module.enable' configuration option for enabling/disabling modules.
-* Check for existence of memcache extension. 
+* Check for existence of memcache extension.
 * Initial support for limiting redirects to trusted hosts.
 * Demo example now shows both friendly and canonical name of the attributes.
 * Other minor fixes for bugs and typos.
@@ -1558,7 +1558,6 @@ Released 2011-10-27.
 * Set NotOnOrAfter in IdP LogoutRequest.
 * Only return PartialLogout from the IdP.
 
-
 ## Version 1.7
 
 * New authentication modules:
@@ -1746,7 +1745,7 @@ Released 2010-05-31.
 * Metadata support for multiple endpoints with [multiple bindings](./simplesamlphp-metadata-endpoints).
 * The metadata generation is using a new set of classes.
   As a result, all generated metadata elements now have a `md:`-prefix.
-* The deprecated functions `init(...)` and `setAuthenticated(...) in the `SimpleSAML_Session` class have been removed.
+* The deprecated functions `init(...)` and `setAuthenticated(...)` in the `SimpleSAML_Session` class have been removed.
 * Configuration check and metadata check was removed, as they were often wrong.
 
 `SAML2 SP`
@@ -1862,7 +1861,7 @@ Released 2009-11-05. Revision 1937.
 * Translation updates.
 * Set the dropdown list as default for built in disco service.
 
-### New modules:
+`New modules`
 
 * `adfs`
 * [`authorize`](./authorize:authorize)
@@ -1999,7 +1998,7 @@ Updates to `config.php`. Please check for updates in your local modified configu
 * New module: Aggregator: Aggregates metadata. Used in Kalmar Union.
 * New module: Metarefresh, download, parses and consumes metadata.
 * New module: SanityCheck. Checks if things looks good and reports bad configuration etc.
-* New module: Cron. Will perform tasks regularly. 
+* New module: Cron. Will perform tasks regularly.
 * Module: SAML2.0. SAML 2.0 SP implemented as an module. Yet not documented how to use, but all SAML 2.0 SP functionality may be moved out to this module for better modularization.
 * New module: statistics. Parses STAT log files, and aggregates based on a generic rule system. Output is stored in aggregated text files, and a frontend is included to present statistics with tables and graphs. Used sanitycheck and cron.
 * Added support for IdP initiated SSO.
@@ -2046,7 +2045,7 @@ Released 2008-11-04. Revision 973.
 
 Configuration file `config.php` should not include significant changes, except one language added.
 
-### New features
+`New features`
 
 * Documentation update
 * Added new language. Now there are two different portugese
@@ -2071,7 +2070,7 @@ Configuration file `config.php` should not include significant changes, except o
 * iFrame AJAX SLO improved. Now with non-JavaScript fallback
   handling.
 
-### Bug fixes
+`Bug fixes`
 
 * Fixed warning with XML validator.
 * Improved loading of private/public keys in XML/Signer.
@@ -2088,7 +2087,7 @@ When you upgrade from an previous version you should copy `authsources.php` from
 
 There are also some changes to the templates. If you have any custom templates, they should be updated to match the ones included. Of notable changes is that the `t(...)`-functtes, they should be updated to match the ones included. Of notable changes is that the `t(...)`-function has been simplified, and takes far fewer parameters. It is backwardscompatible, but will write a warning to the log until updated. The backwards compatibility will be removed in a future version.
 
-### New features
+`New features`
 
 * Experimental support for modules. Currently modules can contain
   custom authentication sources, authentication processing filters
@@ -2110,7 +2109,7 @@ There are also some changes to the templates. If you have any custom templates, 
 * Proof-of-concept MetaShare service, for easy publishing and sharing
   of metadata.
 
-### Bug fixes
+`Bug fixes`
 
 * Fixed generated SAML 2.0 metadata to be correct.
 * Fixed logout for Auth MemCookie.
@@ -2133,7 +2132,7 @@ There are also several changes to the template files. If you have done any custo
 
 New localizations in version 1.1: Sami, Svenska (swedish), Suomeksi (finnish), Nederlands, Luxembourgish, Slovenian, Hrvatski (Croatian), Magyar (Hungarian).
 
-### New features
+`New features`
 
 * Add support for saving the users choice of IdP in the IdP discovery
   service.
@@ -2189,7 +2188,7 @@ New localizations in version 1.1: Sami, Svenska (swedish), Suomeksi (finnish), N
   web browser.
 * Added fallback to base language if translation isn't found.
 
-### Bug fixes
+`Bug fixes`
 
 * Modified IdP discovery service to support Shibboleth 2.0 SP.
 * Fix setcookie warning for PHP version \< 5.2.

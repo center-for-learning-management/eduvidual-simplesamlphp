@@ -1,5 +1,4 @@
-Authentication Processing Filters in SimpleSAMLphp
-==================================================
+# Authentication Processing Filters in SimpleSAMLphp
 
 [TOC]
 
@@ -23,8 +22,7 @@ Be aware that Authentication Proccessing Filters do replace some of the previous
 
 Later in this document, we will describe in detail the alternative Authentication Proccessing Filters that will replicate these functionalities.
 
-How to configure Auth Proc Filters
-----------------------------------
+## How to configure Auth Proc Filters
 
 *Auth Proc Filters* can be set globally, or to be specific for only one SP or one IdP. That means there are five locations where you can configure *Auth Proc Filters*:
 
@@ -68,6 +66,7 @@ When you know the class definition of a filter, and the priority, the simple way
 ```
 
 This is analogous to:
+
 ```php
 20 => [
     'class' => 'core:TargetedID'

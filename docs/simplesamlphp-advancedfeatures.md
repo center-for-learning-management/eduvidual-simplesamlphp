@@ -24,13 +24,17 @@ If you have followed the instructions for setting up an SP, and have configured 
 
 In `metadata/saml20-idp-hosted.php`:
 
-    'auth' => 'default-sp',
+```php
+'auth' => 'default-sp',
+```
 
 In `config/authsources.php`:
 
-    'default-sp' => [
-        'saml:SP',
-    ],
+```php
+'default-sp' => [
+    'saml:SP',
+],
+```
 
 ## Attribute control
 
@@ -66,13 +70,12 @@ SimpleSAMLphp supports signing of the metadata it generates. Metadata signing is
 - `metadata.sign.privatekey_pass`: Passphrase which should be used to open the private key. This parameter is optional, and should be left out if the private key is unencrypted.
 - `metadata.sign.certificate`: Location of certificate data which matches the private key.
 - `metadata.sign.algorithm`: The algorithm to use when signing metadata for this entity. Defaults to RSA-SHA256. Possible values:
-
- - `http://www.w3.org/2000/09/xmldsig#rsa-sha1`
-   *Note*: the use of SHA1 is **deprecated** and will be disallowed in the future.
- - `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256`
-   The default.
- - `http://www.w3.org/2001/04/xmldsig-more#rsa-sha384`
- - `http://www.w3.org/2001/04/xmldsig-more#rsa-sha512`
+  - `http://www.w3.org/2000/09/xmldsig#rsa-sha1`
+    *Note*: the use of SHA1 is **deprecated** and will be disallowed in the future.
+  - `http://www.w3.org/2001/04/xmldsig-more#rsa-sha256`
+    The default.
+  - `http://www.w3.org/2001/04/xmldsig-more#rsa-sha384`
+  - `http://www.w3.org/2001/04/xmldsig-more#rsa-sha512`
 
 These options can be configured globally in the `config/config.php`-file, or per SP/IdP by adding them to the hosted metadata for the SP/IdP. The configuration in the metadata for the SP/IdP takes precedence over the global configuration.
 
