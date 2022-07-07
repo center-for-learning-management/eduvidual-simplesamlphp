@@ -154,36 +154,6 @@ jobs:
           bash vendor/bin/check-syntax-xml.sh
           bash vendor/bin/check-syntax-json.sh
 
-  docs:
-    name: Documentation
-    runs-on: [ubuntu-latest]
-    needs: [quality]
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Get specific changed files
-        id: changed-files-specific
-        uses: tj-actions/changed-files@v23.1
-        with:
-          files: |
-            **/*.md
-
-      - name: Run docs build if any of markdown-files have changed
-        if: steps.changed-files-specific.outputs.any_changed == 'true' && contains('refs/heads/master refs/heads/simplesamlphp-', github.ref)
-        uses: actions/github-script@v6
-        with:
-          # Token has to be generated on a user account that controls the docs-repository.
-          # The _only_ scope to select is "Access public repositories", nothing more.
-          github-token: ${{ secrets.PAT_TOKEN }}
-          script: |
-            await github.rest.actions.createWorkflowDispatch({
-              owner: 'simplesamlphp',
-              repo: 'docs',
-              workflow_id: 'mk_docs.yml',
-              ref: 'main'
-            })
-
   quality:
     name: Quality control
     runs-on: [ubuntu-latest]
