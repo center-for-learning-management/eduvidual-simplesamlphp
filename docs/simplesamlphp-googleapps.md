@@ -1,16 +1,13 @@
-Setting up a SimpleSAMLphp SAML 2.0 IdP to use with Google Workspace (G Suite / Google Apps) for Education
-============================================
+# Setting up a SimpleSAMLphp SAML 2.0 IdP to use with Google Workspace (G Suite / Google Apps) for Education
 
 [TOC]
 
-SimpleSAMLphp news and documentation
-------------------------------------
+## SimpleSAMLphp news and documentation
 
 This document is part of the SimpleSAMLphp documentation suite.
 
  * [List of all SimpleSAMLphp documentation](https://simplesamlphp.org/docs)
  * [SimpleSAMLphp homepage](https://simplesamlphp.org)
-
 
 ## Introduction
 
@@ -20,14 +17,16 @@ This article assumes that you have already read the SimpleSAMLphp installation m
 a version of SimpleSAMLphp at your server.
 
 In this example we will setup this server as an IdP for Google Workspace:
-	dev2.andreas.feide.no
 
+dev2.andreas.feide.no
 
 ## Enabling the Identity Provider functionality
 
 Edit `config.php`, and enable the SAML 2.0 IdP:
 
-    'enable.saml20-idp' => true,
+```php
+'enable.saml20-idp' => true,
+```
 
 ## Setting up a signing certificate
 
@@ -55,9 +54,7 @@ Here is an example of typical user input when creating a certificate request:
 
 **Note**: SimpleSAMLphp will only work with RSA and not DSA certificates.
 
-
-Authentication source
----------------------
+## Authentication source
 
 The next step is to configure the way users authenticate on your IdP. Various modules in the `modules/` directory provides methods for authenticating your users. This is an overview of those that are included in the SimpleSAMLphp distribution:
 
@@ -72,51 +69,47 @@ The next step is to configure the way users authenticate on your IdP. Various mo
 
 For more authentication modules, see [SimpleSAMLphp Identity Provider QuickStart](simplesamlphp-idp).
 
-
 In this guide, we will use the `exampleauth:UserPass` authentication module. This module does not have any dependencies, and is therefore simple to set up.
 
 After you have successfuly tested that everything is working with the simple `exampleauth:UserPass`, you are encouraged to setup SimpleSAMLphp IdP towards your user storage, such as an LDAP directory. (Use the links on the authentication sources above to read more about these setups. `ldap:LDAP` is the most common authentication source.)
 
-
-Configuring the authentication source
--------------------------------------
+## Configuring the authentication source
 
 The `exampleauth:UserPass` authentication module is part of the `exampleauth` module. This module isn't enabled by default, so you will have to enable it. In
 `config.php`, search for the `module.enable` key and set `exampleauth` to true:
 
-```
-    'module.enable' => [
-         'exampleauth' => true,
-         …
-    ],
+```php
+'module.enable' => [
+    'exampleauth' => true,
+    …
+],
 ```
 
 The next step is to create an authentication source with this module. An authentication source is an authentication module with a specific configuration. Each authentication source has a name, which is used to refer to this specific configuration in the IdP configuration. Configuration for authentication sources can be found in `config/authsources.php`.
 
 In this example we will use `example-userpass`, and hence that section is what matters and will be used.
 
-	<?php
-	$config = [
-		'example-userpass' => [
-			'exampleauth:UserPass',
-			'student:studentpass' => [
-				'uid' => ['student'],
-			],
-			'employee:employeepass' => [
-				'uid' => ['employee'],
-			],
-		],
-	];
-	?>
+```php
+<?php
+
+$config = [
+    'example-userpass' => [
+        'exampleauth:UserPass',
+        'student:studentpass' => [
+            'uid' => ['student'],
+        ],
+        'employee:employeepass' => [
+            'uid' => ['employee'],
+        ],
+    ],
+];
+```
 
 This configuration creates two users - `student` and `employee`, with the passwords `studentpass` and `employeepass`. The username and password are stored in the array index `student:studentpass` for the `student`-user. The attributes (only `uid` in this example) will be returned by the IdP when the user logs on.
-
-
 
 ## Configuring metadata for an SAML 2.0 IdP
 
 If you want to setup a SAML 2.0 IdP for Google Workspace, you need to configure two metadata files: `saml20-idp-hosted.php` and `saml20-sp-remote.php`.
-
 
 ### Configuring SAML 2.0 IdP Hosted metadata
 
@@ -125,7 +118,6 @@ This is the configuration of the IdP itself. Here is some example config:
 ```php
 // The SAML entity ID is the index of this config.
 $metadata['https://example.org/saml-idp'] => [
-
     // The hostname of the server (VHOST) that this SAML entity will use.
     'host' => '__DEFAULT__',
 
@@ -139,29 +131,30 @@ $metadata['https://example.org/saml-idp'] => [
 
 **Note**: You can only have one entry in the file with host equal to `__DEFAULT__`, therefore you should replace the existing entry with this one, instead of adding this entry as a new entry in the file. 
 
-
 ### Configuring SAML 2.0 SP Remote metadata
 
 In the `saml20-sp-remote.php` file we will configure an entry for Google Workspace for Education. There is already an entry for Google Workspace in the template, but we will change the domain name:
 
-      /*
-       * This example shows an example config that works with Google Workspace (G Suite / Google Apps) for education.
-       * What is important is that you have an attribute in your IdP that maps to the local part of the email address
-       * at Google Workspace. E.g. if your google account is foo.com, and you have a user with email john@foo.com, then you
-       * must properly configure the saml:AttributeNameID authproc-filter with the name of an attribute that for this user has the value of 'john'.
-       */
-      $metadata['https://www.google.com/a/g.feide.no'] => [
-        'AssertionConsumerService'   => 'https://www.google.com/a/g.feide.no/acs', 
-        'NameIDFormat'               => 'urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress',
-        'simplesaml.attributes'      => false,
-        'authproc'                   => [
-          1 => [
-            'saml:AttributeNameID',
-            'attribute' => 'uid',
-            'format' => 'urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress',
-          ],
+```php
+/*
+ * This example shows an example config that works with Google Workspace (G Suite / Google Apps) for education.
+ * What is important is that you have an attribute in your IdP that maps to the local part of the email address
+ * at Google Workspace. E.g. if your google account is foo.com, and you have a user with email john@foo.com, then you
+ * must properly configure the saml:AttributeNameID authproc-filter with the name of an attribute that for this user has the value of 'john'.
+ */
+$metadata['https://www.google.com/a/g.feide.no'] => [
+    'AssertionConsumerService' => 'https://www.google.com/a/g.feide.no/acs', 
+    'NameIDFormat' => 'urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress',
+    'simplesaml.attributes' => false,
+    'authproc' => [
+        1 => [
+          'saml:AttributeNameID',
+          'attribute' => 'uid',
+          'format' => 'urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress',
         ],
-      ];
+    ],
+];
+```
 
 You must also map some attributes received from the authentication module into email field sent to Google Workspace. In this example, the  `uid` attribute is set.  When you later configure the IdP to connect to a LDAP directory or some other authentication source, make sure that the `uid` attribute is set properly, or you can configure another attribute to use here. The `uid` attribute contains the local part of the user name.
 
@@ -201,13 +194,13 @@ You will find in the metadata the XML tag `<md:SingleSignOnService>`
 which contains the right URL to input in the field, it will look something
 like this:
 
-	https://dev2.andreas.feide.no/simplesaml/saml2/idp/SSOService.php
+https://dev2.andreas.feide.no/simplesaml/saml2/idp/SSOService.php
 
 You must also configure the IdP initiated Single LogOut endpoint of your server.
 You will find this in your metadata XML in the tag
 `<md:SingleLogoutService>`. It will look something like:
 
-	http://dev2.andreas.feide.no/simplesaml/saml2/idp/SingleLogoutService.php
+http://dev2.andreas.feide.no/simplesaml/saml2/idp/SingleLogoutService.php
 
 again, using the host name of your IdP server.
 
@@ -229,7 +222,7 @@ Before we can test login, a new user must be defined in Google Workspace. This u
 
 Go to the URL of your mail account for this domain, the URL is similar to the following:
 
-	http://mail.google.com/a/yourgoogleappsdomain.com
+http://mail.google.com/a/yourgoogleappsdomain.com
 
 replacing the last part with your own Google Workspace domain name.
 
@@ -237,12 +230,11 @@ replacing the last part with your own Google Workspace domain name.
 
 Make sure that your IdP server runs HTTPS (TLS). The Apache documentation contains information for how to configure HTTPS.
 
-Support
--------
+## Support
 
 If you need help to make this work, or want to discuss SimpleSAMLphp with other users of the software, you are fortunate: Around SimpleSAMLphp there is a great Open source community, and you are welcome to join! The forums are open for you to ask questions, contribute answers other further questions, request improvements or contribute with code or plugins of your own.
 
--  [SimpleSAMLphp homepage](https://simplesamlphp.org)
--  [List of all available SimpleSAMLphp documentation](https://simplesamlphp.org/docs/)
--  [Join the SimpleSAMLphp user's mailing list](https://simplesamlphp.org/lists)
+- [SimpleSAMLphp homepage](https://simplesamlphp.org)
+- [List of all available SimpleSAMLphp documentation](https://simplesamlphp.org/docs/)
+- [Join the SimpleSAMLphp user's mailing list](https://simplesamlphp.org/lists)
 
