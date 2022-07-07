@@ -16,7 +16,9 @@ You need both a memcache server and a the PHP memcached client (extension).
 How this is done depends on the distribution.
 If you are running Debian or Ubuntu, you can install this by running:
 
-    apt install memcached php-memcached
+```bash
+apt install memcached php-memcached
+```
 
 simpleSAMLphp also supports the legacy `php-memcache` (without `d`) variant.
 
@@ -33,11 +35,11 @@ Enabling artifact on the IdP
 To enable the IdP to send artifacts, you must add the `saml20.sendartifact` option to the `saml20-idp-hosted` metadata file:
 
 ```php
-    $metadata['https://example.org/saml-idp'] = [
-        [....]
-        'auth' => 'example-userpass',
-        'saml20.sendartifact' => TRUE,
-    ];
+$metadata['https://example.org/saml-idp'] = [
+    [....]
+    'auth' => 'example-userpass',
+    'saml20.sendartifact' => true,
+];
 ```
 
 Add new metadata to SPs
@@ -48,13 +50,13 @@ You therefore need to update the metadata for your IdP at your SPs.
 `saml20-idp-remote` metadata for SimpleSAMLphp SPs should contain something like:
 
 ```php
-    'ArtifactResolutionService' => [
-        [
-            'index' => 0,
-            'Location' => 'https://idp.example.org/simplesaml/saml2/idp/ArtifactResolutionService.php',
-            'Binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:SOAP',
-        ],
+'ArtifactResolutionService' => [
+    [
+        'index' => 0,
+        'Location' => 'https://idp.example.org/simplesaml/saml2/idp/ArtifactResolutionService.php',
+        'Binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:SOAP',
     ],
+],
 ```
 
 SP metadata on the IdP
@@ -65,18 +67,18 @@ This means that you must use the complex endpoint format in `saml20-sp-remote` m
 In general, that should look something like:
 
 ```php
-    'AssertionConsumerService' => [
-        [
-            'Binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST',
-            'Location' => 'https://sp.example.org/simplesaml/module.php/saml/sp/assertionConsumerService/default-sp',
-            'index' => 0,
-        ],
-        [
-            'Binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact',
-            'Location' => 'https://sp.example.org/simplesaml/module.php/saml/sp/assertionConsumerService/default-sp',
-            'index' => 2,
-        ],
+'AssertionConsumerService' => [
+    [
+        'Binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST',
+        'Location' => 'https://sp.example.org/simplesaml/module.php/saml/sp/assertionConsumerService/default-sp',
+        'index' => 0,
     ],
+    [
+        'Binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact',
+        'Location' => 'https://sp.example.org/simplesaml/module.php/saml/sp/assertionConsumerService/default-sp',
+        'index' => 2,
+    ],
+],
 ```
 
 (The specific values of the various fields will vary depending on the SP.)
@@ -90,10 +92,10 @@ To do this, you need to set the `https.certificate` option in the `saml20-idp-ho
 That option should refer to a file containing the webserver certificate.
 
 ```php
-    $metadata['https://example.org/saml-idp'] = [
-        [....]
-        'auth' => 'example-userpass',
-        'saml20.sendartifact' => TRUE,
-        'https.certificate' => '/etc/apache2/webserver.crt',
-    ];
+$metadata['https://example.org/saml-idp'] = [
+    [....]
+    'auth' => 'example-userpass',
+    'saml20.sendartifact' => true,
+    'https.certificate' => '/etc/apache2/webserver.crt',
+];
 ```
