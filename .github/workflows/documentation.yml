@@ -3,35 +3,16 @@ name: Documentation
 on:
   push:
     branches: [ master, release-* ]
+    paths:
+      - '**.md'
   pull_request:
     branches: [ master, release-* ]
+    paths:
+      - '**.md'
 
 jobs:
-  pre-conditions:
-    name: Pre-conditions
-    runs-on: [ubuntu-latest]
-    outputs:
-      run_rest_jobs: ${{ steps.set_output.outputs.run_jobs }}
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Get specific changed files and see if any of the markdown-files have changed
-        id: changed-files-specific
-        uses: tj-actions/changed-files@v23.1
-        with:
-          files: |
-            **/*.md
-
-      - name: Set trigger variable
-        id: set_output
-        run: |
-          echo "::set-output name=run_jobs::true"
-
   quality:
-    name: Quality
-    needs: pre-conditions
-    if: needs.pre-conditions.outputs.run_rest_jobs == 'true'
+    name: Quality checks
     runs-on: [ubuntu-latest]
 
     steps:
@@ -60,11 +41,6 @@ jobs:
 
       - name: Install Composer dependencies
         run: composer install --no-progress --prefer-dist --optimize-autoloader
-
-      - uses: actions/download-artifact@v3
-        with:
-          name: build-data
-          path: ${{ github.workspace }}/build
 
       - name: Lint markdown files
         uses: nosborn/github-action-markdown-cli@v3.1.0
