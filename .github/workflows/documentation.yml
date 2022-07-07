@@ -48,6 +48,11 @@ jobs:
           files: .
           ignore_path: .markdownlintignore
 
+      - name: Spelling check
+        uses: rojopolis/spellcheck-github-actions@0.24.0
+        with:
+          config_path: .spellcheck.yml
+
   build:
     name: Build documentation
     needs: quality
