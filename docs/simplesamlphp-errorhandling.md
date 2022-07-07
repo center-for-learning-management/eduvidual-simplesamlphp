@@ -28,7 +28,7 @@ Exceptions thrown at this stage will be caught and delivered to the appropriate 
 
 If you want to throw an exception outside of those methods, i.e. after you have done a redirect, you need to use the `\SimpleSAML\Auth\State::throwException()` function:
 
-```
+```php
 <?php
 
 $id = $_REQUEST['StateId'];
@@ -41,7 +41,7 @@ $state = \SimpleSAML\Auth\State::loadState($id, 'somestage...');
 
 The `\SimpleSAML\Auth\State::throwException` function will then transfer your exception to the appropriate error handler.
 
-### Note
+`Note`
 
 Note that we use the `\SimpleSAML\Error\Exception` class in both cases.
 This is because the delivery of the exception may require a redirect to a different web page.
@@ -76,7 +76,7 @@ To return a specific SAML 2 error, you should:
 * Add that exception to the list in `fromException()`.
 * Consider adding the exception to `toException()` in the same file. (See the next section.)
 
-### Note
+`Note`
 
 While it is possible to throw SAML 2 errors directly from within authentication sources and processing filters, this practice is discouraged.
 Throwing SAML 2 errors will tie your code directly to the SAML 2 protocol, and it may be more difficult to use with other protocols.

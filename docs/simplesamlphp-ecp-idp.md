@@ -13,7 +13,7 @@ The SAML V2.0 Enhanced Client or Proxy (ECP) profile is a SSO profile for use wi
 
 This feature has been tested to work with Microsoft Office 365, but other service providers may require features of the ECP profile that are currently unsupported!
 
-# Enabling ECP Profile on the IdP
+## Enabling ECP Profile on the IdP
 
 To enable the IdP to send ECP assertions you must add the `saml20.ecp` option to the `saml20-idp-hosted` metadata file:
 

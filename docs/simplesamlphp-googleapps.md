@@ -6,8 +6,8 @@
 
 This document is part of the SimpleSAMLphp documentation suite.
 
- * [List of all SimpleSAMLphp documentation](https://simplesamlphp.org/docs)
- * [SimpleSAMLphp homepage](https://simplesamlphp.org)
+* [List of all SimpleSAMLphp documentation](https://simplesamlphp.org/docs)
+* [SimpleSAMLphp homepage](https://simplesamlphp.org)
 
 ## Introduction
 
@@ -33,7 +33,9 @@ Edit `config.php`, and enable the SAML 2.0 IdP:
 You must generate a certificate for your IdP.
 Here is an example of an openssl command to generate a new key and a self signed certificate to use for signing SAML messages:
 
-    openssl req -newkey rsa:3072 -new -x509 -days 3652 -nodes -out googleworkspaceidp.crt -keyout googleworkspaceidp.pem
+```bash
+openssl req -newkey rsa:3072 -new -x509 -days 3652 -nodes -out googleworkspaceidp.crt -keyout googleworkspaceidp.pem
+```
 
 The certificate above will be valid for 10 years.
 
@@ -237,4 +239,3 @@ If you need help to make this work, or want to discuss SimpleSAMLphp with other 
 - [SimpleSAMLphp homepage](https://simplesamlphp.org)
 - [List of all available SimpleSAMLphp documentation](https://simplesamlphp.org/docs/)
 - [Join the SimpleSAMLphp user's mailing list](https://simplesamlphp.org/lists)
-

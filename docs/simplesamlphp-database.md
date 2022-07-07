@@ -40,6 +40,7 @@ $table would be set to "sp_saml20_idp_hosted"
 You can query the database through two public functions read() and write() which are fairly self-explanitory when it comes to determining which one to use when querying.
 
 ### Writing to The Database
+
 Since the database class allows administrators to configure primary and secondary database servers, the write function will always use the primary database connection.
 
 The write function takes 2 parameters: SQL, params.
@@ -74,6 +75,7 @@ $query = $db->write("CREATE TABLE IF NOT EXISTS $table (id INT(16) NOT NULL, dat
 ```
 
 ### Reading The Database
+
 Since the database class allows administrators to configure primary and secondary database servers, the read function will randomly select a secondary server to query. If no secondaries are configured, it will read from the primary.
 
 The read function takes 2 parameters: SQL, params.

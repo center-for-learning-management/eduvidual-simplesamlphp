@@ -24,7 +24,6 @@ mkdir mymodule
 Since this is a custom module, it should always be enabled in the configuration.
 Now that we have our own module, we can move on to creating an authentication source.
 
-
 Creating a basic authentication source
 --------------------------------------
 
@@ -59,19 +58,19 @@ class MyAuth extends \SimpleSAML\Module\core\Auth\UserPassBase
 
 Some things to note:
 
-  - The classname is `\SimpleSAML\Module\mymodule\Auth\Source\MyAuth`.
-    This tells SimpleSAMLphp to look for the class in `modules/mymodule/lib/Auth/Source/MyAuth.php`.
+- The classname is `\SimpleSAML\Module\mymodule\Auth\Source\MyAuth`.
+  This tells SimpleSAMLphp to look for the class in `modules/mymodule/lib/Auth/Source/MyAuth.php`.
 
-  - Our authentication source subclasses `\SimpleSAML\Module\core\Auth\UserPassBase`.
-    This is a helper-class that implements much of the common code needed for username/password authentication.
+- Our authentication source subclasses `\SimpleSAML\Module\core\Auth\UserPassBase`.
+  This is a helper-class that implements much of the common code needed for username/password authentication.
 
-  - The `login` function receives the username and password the user enters.
-    It is expected to authenticate the user.
-    If the username or password is correct, it must return a set of attributes for the user.
-    Otherwise, it must throw the `\SimpleSAML\Error\Error('WRONGUSERPASS');` exception.
+- The `login` function receives the username and password the user enters.
+  It is expected to authenticate the user.
+  If the username or password is correct, it must return a set of attributes for the user.
+  Otherwise, it must throw the `\SimpleSAML\Error\Error('WRONGUSERPASS');` exception.
 
-  - Attributes are returned as an associative array of `name => values` pairs.
-    All attributes can have multiple values, so the values are always stored in an array.
+- Attributes are returned as an associative array of `name => values` pairs.
+  All attributes can have multiple values, so the values are always stored in an array.
 
 Configuring our authentication source
 -------------------------------------
