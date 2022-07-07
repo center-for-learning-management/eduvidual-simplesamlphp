@@ -26,15 +26,15 @@ Released TBD
 * Fixed compatibility with Composer pre 1.8.5 (Debian 10) (#1427)
 * Updated npm dependencies up to February 1, 2021
 
-### memcacheMonitor
+`memcacheMonitor`
 
 * Fix a bug in the Twig-template that causes an exception on newer Twig-versions
 
-### negotiate
+`negotiate`
 
 * Fix a bug that was breaking the module when using the old UI
 
-### statistics
+`statistics`
 
 * Fix a bug in the Twig-template that causes an exception on newer Twig-versions
 
@@ -72,34 +72,34 @@ Released 2020-09-02
 * Support for Symfony 3.x is now deprecated
 * Support for Twig 1.x is now deprecated
 
-### authcrypt
+`authcrypt`
 
 * The dependency for whitehat101/apr1-md5 was moved from the base repository to the module (v0.9.2)
 
-### authx509
+`authx509`
 
 * Restore PHP 5.6 compatibility (v0.9.5)
 
-### cron
+`cron`
 
 * Fixed old-ui (#1248)
 
-### ldap
+`ldap`
 
 * Moved array with binary attributes to authsource config (v0.9.9)
   Instead of having to edit code, you can now set 'attributes.binary' in the authsource configuration.
 
-### metarefresh
+`metarefresh`
 
 * Add attributewhitelist to support e.g. R&S+Sirtfi (v0.9.5)
 * Restore PHP 5.6 compatibility (v0.9.6)
 
-### negotiate ###
+`negotiate`
 
 * Restore PHP 5.6 compatibility (v0.9.8)
 * Fixed a link (v0.9.9)
 
-### saml2 library
+`saml2 library`
 
 * Fixed a bug in the AuthnRequest-class that would raise an InvalidArgumentException when setting
   the AssertionConsumerServiceIndex as an integer on an saml:SP authsource.
@@ -117,31 +117,31 @@ Released 2020-05-12
 * Fix a broken migration query in the LogoutStore (#1324).
 * Fix an issue with the SameSite cookie parameter when running on PHP versions older than 7.3 (#1320).
 
-### adfs
+`adfs`
 
 * Fixed a broken link to one of the assets (v0.9.6).
 
-### ldap
+`ldap`
 
 * Handle binary attributes in a generic way (v0.9.5).
 
-### oauth
+`oauth`
 
 * Fix PHP 7.4 incompatibility (v0.9.2).
 
-### preprodwarning
+`preprodwarning`
 
 * Fix Dutch translations (v0.9.2).
 
-### sanitycheck
+`sanitycheck`
 
 * Fix broken HTML (v0.9.1).
 
-### saml
+`saml`
 
 * Fix several issues in the saml:NameIDAttribute authproc filter (#1325).
 
-### saml2 library
+`saml2 library`
 
 * fixed a standards compliance issue regarding ContactPerson EMail addresses (v3.4.4).
 * fixed an issue parsing very large metadata files (v3.4.3).
@@ -185,7 +185,7 @@ Released 2019-12-09
 * Fixed an issue with several modules being enabled by default (#1257).
 * Fixed an issue with metadata generation for trusted entities (#1247, #1251).
 
-### ldap
+`ldap`
 
 * Fixed an issue affecting the installation in case-insensitive file systems (#1253).
 
@@ -223,13 +223,13 @@ Released 2019-11-19
   but will be easily installable using Composer. For now, they are still included in the package.
 * Many minor fixes to code, css, documentation
 
-### metarefresh
+`metarefresh`
 
 * The algorithm to compute the fingerprint of the certificate that signed
   metadata can be specified with the new `validateFingerprintAlgorithm`
   configuration option.
 
-### saml
+`saml`
 
 * Make the id of the generated signed metadata only change when metadata content changes.
 * New SP metadata configuration options `AssertionConsumerService` and `SingleLogoutServiceLocation`
@@ -243,7 +243,7 @@ Released 2019-11-20
 * Resolved a security issue that exposed host information to unauthenticated users. See
   [SSPSA 201911-02](https://simplesamlphp.org/security/201911-02).
 
-### consentAdmin
+`consentAdmin`
 
 * Fixed an issue with CSS and JavaScript not loading for the module in the new user
   interface.
@@ -297,11 +297,11 @@ Released 2019-07-10
 * Fix a bug in Short SSO Interval warning filter.
 * Apply a workaround for SIGSEGVs during session creation with PHP-FPM 7.3.
 
-### adfs
+`adfs`
 
 * Fixed a missing option to supply a passphrase for the ADFS IDP signing certificate.
 
-### authlinkedin
+`authlinkedin`
 
 * This module has been removed now that LinkedIn no longer supports OAuth1.
   If you relied on this module, you may consider migrating to the
@@ -358,38 +358,38 @@ Released 2019-03-07
 * SimpleSAMLphp can now be used with applications that use Twig 2 and/or Symfony 4.
 * The SAML2 library now uses getters/setters to manipulate objects properties.
 
-### authfacebook
+`authfacebook`
 
 * Fix Facebook compatibility (query parameters).
 
-### authorize
+`authorize`
 
 * Add the possibility to configure a custom rejection message.
 
-### consent
+`consent`
 
 * The module is now disabled by default.
 
-### core
+`core`
 
 * Allow `core:PHP` to manipulate the entire state array.
 * IdP initiated login: add compatibility with Shibboleth parameters.
 
-### multiauth
+`multiauth
 
 * Added a `preselect` configuration option to skip authsource selection (#1005).
 
-### negotiate
+`negotiate`
 
 * The `keytab` setting now allows for relative paths too.
 
-### preprodwarning
+`preprodwarning`
 
 * This module is now deprecated. Use the `production` configuration
   option instead; set it to `false` to show a pre-production warning
   before authentication.
 
-### saml
+`saml`
 
 * Add initial support for SAML Subject ID Attributes.
 * Allow to specify multiple supported NameIdFormats in IdP hosted and SP
@@ -408,7 +408,7 @@ Released 2019-03-07
 * Receiving an eduPersonTargetedID in string form will no longer break
   parsing of the assertion.
 
-### sanitycheck
+`sanitycheck`
 
 * Translated into several languages.
 
@@ -480,38 +480,38 @@ Released 2018-09-06
 * Test authentication: optionally show AuthData array.
 * Improve performance of PDO Metadata Storage handler entity lookup.
 
-### adfs
+`adfs`
 
 * Make signature algorithm configurable with `signature.algorithm`.
 * Use configuration assertion lifetime when available.
 * Use `adfs:wreply` parameter when available.
 
-### authmyspace
+`authmyspace`
 
 * Module removed because service is no longer available.
 
-### cas
+`cas`
 
 * Respect all LDAP options in LDAP call.
 
-### casserver
+`casserver`
 
 * Module removed; superseded by externally hosted module.
 
-### consent
+`consent`
 
 * Sort attribute values for consent.
 * Fix table layout for MySQL > 5.6.
 * Rename `noconsentattributes` to `attributes.exclude`; the former
   is now considered deprecated.
 
-### consentAdmin
+`consentAdmin`
 
 * Work better with TargetedIDs when operating as a proxy.
 * Add `attributes.exclude` option to correspond to the same option
   in the Consent module.
 
-### core
+`core`
 
 * StatisticsWithAttribute: add `passive-` prefix when logging passive
   requests, set new option `skipPassive` to skip logging these altogether.
@@ -521,38 +521,38 @@ Released 2018-09-06
 * AttributeLimit: new options `regex` and `ignoreCase`.
 * AttributeMap: prevent possible infinite loop with some PHP versions.
 
-### ldap
+`ldap`
 
 * AttributeAddUsersGroups: if `attribute.groupname` is set, use the
   configured attribute as the group name rather than the DN.
 * Also base64encode the `ms-ds-consistencyguid` attribute.
 
-### metarefresh
+`metarefresh`
 
 * Return XML parser error for better debugging of problems.
 * Only actually parse metadata types that have been enabled.
 * Fix missing translation.
 
-### Oauth
+`oauth`
 
 * Make module HTTP proxy-aware.
 * Remove unused demo app.
 
-### saml
+`saml`
 
 * AttributeConsumingService: allow to set isDefault and index options.
 * Encrypted attributes in an assertion are now decrypted correctly.
 * Prefer the HTTP-Redirect binding for AuthnRequests if available.
 
-### smartattributes
+`smartattributes`
 
 * Fix to make the `add_authority` option work.
 
-### sqlauth
+`sqlauth`
 
 * The module is now disabled by default.
 
-### statistics
+`statistics`
 
 * Show a decent error message when no data is available.
 
@@ -578,15 +578,15 @@ Released 2018-01-31
 * Resolved a security issue with the open redirect protection mechanism. See [SSPSA 201801-02](https://simplesamlphp.org/security/201801-02).
 * Fix _undefined method_ error when using memcacheD.
 
-### `authfacebook`
+`authfacebook`
 
 * Fix compatibility with Facebook strict URI match.
 
-### `consent`
+`consent`
 
 * Fix statistics not being gathered.
 
-### `sqlauth`
+`sqlauth`
 
 * Prevented a security issue with the connection charset used for MySQL backends. See [SSPSA 201801-03](https://simplesamlphp.org/security/201801-03).
 
@@ -661,32 +661,32 @@ Released 2017-11-20
 * Introduced Twig templating for user interface.
 * Lots of refactoring, code cleanup and added many unit tests.
 
-### `adfs`
+`adfs`
 
 * Fixed POST response form parameter encoding.
 
-### `authYubiKey`
+`authYubiKey`
 
 * Fixed PHP 7 support.
 
-### `authfacebook`
+`authfacebook`
 
 * Updated to work with latest Facebook API.
 
-### `authlinkedin`
+`authlinkedin`
 
 * Added setting `attributes` to specify which attributes to request
   from LinkedIn.
 
-### `authtwitter`
+`authtwitter`
 
 * Added support for fetching the user's email address as attribute.
 
-### `consent`
+`consent`
 
 * Added support for regular expressions in `consent.disable`.
 
-### `core`
+`core`
 
 * Added logging of `REMOTE_ADDR` on successful login.
 * `AttributeMap`: allow fetching mapping files from modules.
@@ -694,15 +694,15 @@ Released 2017-11-20
    none was present.
 * `AttributeCopy`: added option to copy to multiple destination attributes.
 
-### `cron`
+`cron`
 
 * Allow invocation via PHP command line interface.
 
-### `discopower`
+`discopower`
 
 * Added South Africa tab.
 
-### `ldap`
+`ldap`
 
 * Added `search.filter` setting to limit LDAP queries to a custom search
   filter.
@@ -710,33 +710,33 @@ Released 2017-11-20
 * Fixed for using non standard LDAP port numbers.
 * Fixed configuration option of whether to follow LDAP referrals.
 
-### `memcacheMonitor`
+`memcacheMonitor`
 
 * Fixed several missing strings.
 
-### `metarefresh`
+`metarefresh`
 
 * Fixed several spurious PHP notices.
 
-### `multiauth`
+`multiauth`
 
 * Fixed selected source timeout.
 
-### `negotiate`
+`negotiate`
 
 * Fixed authentication failure on empty attributes-array.
 * Fixed PHP notices concerning missing arguments.
 
-### `oauth`
+`oauth`
 
 * Updated library to improve support for OAuth 1.0 Revision A.
 
-### `radius`
+`radius`
 
 * Improved error messages.
 * Added parameter `realm` that will be suffixed to the username entered.
 
-### `saml`
+`saml`
 
 * Handle instead of reject assertions that do not contain a NameID.
 * Added options to configure `AllowCreate` and `SPNameQualifier`.
@@ -749,11 +749,11 @@ Released 2017-11-20
   NameID XML form, instead of the incorrect simple string. We will also
   refuse to parse an assertion with an eduPersonTargetedID in 'string' format.
 
-### `smartattributes`
+`smartattributes`
 
 * Fix SmartName authproc that failed to load.
 
-### `sqlauth`
+`sqlauth`
 
 * Fixed SQL schema for usergroups table.
 
@@ -965,30 +965,30 @@ Released 2016-02-15
 * Updated jQuery to the latest 1.8.X version.
 * Updated translations.
 
-### `authcrypt`
+`authcrypt`
 
 * Added whitehat101/apr1-md5 as a dependency for Apache htpasswd.
 
-### `authX509`
+`authX509`
 
 * Added an authentication processing filter to warn about certificate expiration.
 
-### `ldap`
+`ldap`
 
 * Added a new `port` configuration option.
 * Better error reporting.
 
-### `metaedit`
+`metaedit`
 
 * Removed the `admins` configuration option.
 
-### `metarefresh`
+`metarefresh`
 
 * Added the possibility to specify which types of entities to load.
 * Added the possibility to verify metadata signatures by using the public key present in a certificate.
 * Fix `certificate` precedence over `fingerprint` in the configuration options when verifying metadata signatures.
 
-### `smartnameattribute`
+`smartnameattribute`
 
 * This module was deprecated long time ago and has now been removed. Use the `smartattributes` module instead.
 
@@ -1025,31 +1025,31 @@ Released 2014-09-25.
 * Updated translations.
 * New language: Basque.
 
-### `adfs`
+`adfs`
 
 * Honour the 'wreply' parameter when redirecting.
 
-### `aggregator`
+`aggregator`
 
 * Fixed an issue when regenerating metadata from certain metadata sources.
 
-### `discopower`
+`discopower`
 
 * Bug fix.
 
-### `expirycheck`
+`expirycheck`
 
 * Translations are now possible for this module.
 
-### `metarefresh`
+`metarefresh`
 
 * Use cached metadata if something goes wrong when refreshing feeds.
 
-### `openidProvider`
+`openidProvider`
 
 * Fix for compatibility with versions of PHP greater or equal to 5.4.
 
-### `saml`
+`saml`
 
 * Make it possible to add friendly names to attributes in SP metadata.
 * The RSA_1.5 (RSA with PKCS#1 v1.5 padding) encryption algorithm is now blacklisted by default for security reasons.
@@ -1057,7 +1057,7 @@ Released 2014-09-25.
 * Solved an issue that allowed bypassing authentication status checks when presenting an 'IDPList' parameter.
 * The 'Destination' attribute is now always sent in logout responses issued by an SP.
 
-### `sqlauth`
+`sqlauth`
 
 * Updated documentation to remove bad practice with regard to password storage.
 
@@ -1090,37 +1090,37 @@ Released 2014-03-24.
 * Added Romanian translation.
 * Bug fixes and documentation enhancements.
 
-### `adfs`
+`adfs`
 
 * Support for exporting metadata.
 
-### `aggregator`
+`aggregator`
 
 * Support for RegistrationInfo (MDRPI) elements in the metadata.
 * Fix for HTTP header injection vulnerability.
 * Fix for directory traversal vulnerability.
 
-### `aggregator2`
+`aggregator2`
 
 * Support for RegistrationInfo (MDRPI) elements in the metadata.
 
-### `aselect`
+`aselect`
 
 * License changed to LGPL 2.1.
 
-### `authfacebook`
+`authfacebook`
 
 * Updated extlibinc to 3.2.2.
 
-### `authtwitter`
+`authtwitter`
 
 * Added 'force_login' configuration option.
 
-### `cdc`
+`cdc`
 
 * Bugfix related to request validation.
 
-### `core`
+`core`
 
 * The AttributeAlter filter no longer throws an exception if the attribute was not found.
 * Support for removal of values in the AttributeAlter filter, with '%remove' flag.
@@ -1132,33 +1132,33 @@ Released 2014-03-24.
 * Added %duplicate flag to AttributeMap, to leave original names in place when using map file.
 * Fix infinite loop when overwriting attributes with AttributeMap.
 
-### `discopower`
+`discopower`
 
 * Bugfix for incorrect handling of the 'idpdisco.extDiscoveryStorage' option.
 
-### `ldap`
+`ldap`
 
 * Support for configuring the duplicate attribute handling policy in AttributeAddFromLDAP, 'attribute.policy' option.
 * Support for binary attributes in the AttributeAddFromLDAP filter.
 * Support for multiple attributes in the AttributeAddFromLDAP filter.
 
-### `metarefresh`
+`metarefresh`
 
 * Support for specifying permissions of the resulting files.
 
-### `negotiate`
+`negotiate`
 
 * Added support for "attributes"-parameter.
 
-### `oauth`
+`oauth`
 
 * Bugfix related to authorize URL building.
 
-### `openidProvider`
+`openidProvider`
 
 * Support for SReg and AX requests.
 
-### `saml`
+`saml`
 
 * Send 'isPassive' in passive discovery requests.
 * Support for generating NameIDFormat in service providers with NameIDPolicy set.
@@ -1166,11 +1166,11 @@ Released 2014-03-24.
 * Support for the HTTP-POST binding in WebSSO profile.
 * Fix for entity ID validation problems when using the IDPList configuration option.
 
-### `smartattributes`
+`smartattributes`
 
 * New 'add_candidate' option to allow the user to decide whether to prepend or not the candidate attribute name to the resulting value.
 
-### `statistics`
+`statistics`
 
 * Bugfix in statistics aggregator.
 
@@ -1194,53 +1194,53 @@ Released 2013-06-05.
 * Several translations updated.
 * Added Latvian translation.
 
-### `authorize`
+`authorize`
 
 * Added a logout link to the 403 error page.
 
-### `authtwitter`
+`authtwitter`
 
 * Updated API endpoint for version 1.1.
 * Fix for oauth_verifier parameter.
 
-### `authX509`
+`authX509`
 
 * ldapusercert validation made optional.
 
-### `consent`
+`consent`
 
 * Added support for SQLite databases.
 
-### `core`
+`core`
 
 * Fix error propagation in UserPass(Org)Base authentication sources.
 * MCrypt module marked as required.
 
-### `discopower`
+`discopower`
 
 * Get the name of an IdP from mdui:DisplayName.
 
-### `expirycheck`
+`expirycheck`
 
 * PHP 5.4 compatibility fixes.
 
-### `InfoCard`
+`InfoCard`
 
 * PHP 5.4 compatibility fixes.
 
-### `ldap`
+`ldap`
 
 * Added an option to disable following referrals.
 
-### `metarefresh`
+`metarefresh`
 
 * Improved help message.
 
-### `oauth`
+`oauth`
 
 * PHP 5.4 compatibility fixes.
 
-### `saml`
+`saml`
 
 * Verify that the issuer of an AuthnResponse is the same entity ID we sent a request to.
 * Added separate option to enable Holder of Key support on SP.
@@ -1253,20 +1253,20 @@ Released 2013-06-05.
 * Support for more contact types in SP metadata.
 * New information in statistics with the time it took for a login to happen.
 
-### `sanitycheck`
+`sanitycheck`
 
 * Configuration file made optional.
 
-### `smartattributes`
+`smartattributes`
 
 * New filter: smartattributes:SmartID.
 * New filter: smartattributes:SmartName.
 
-### `smartnameattribute`
+`smartnameattribute`
 
 * Deprecated.
 
-### `wsfed`
+`wsfed`
 
 * Support for SLO in WS-Fed.
 
@@ -1281,23 +1281,23 @@ Released 2012-09-25.
 * Update translations.
 * Added Serbian translation.
 
-### `core`
+`core`
 
 * `core:UserPass(Org)Base`: Add "remember username" option.
 
-### `papi`
+`papi`
 
 * New authentication module supporting PAPI protocol.
 
-### `radius`
+`radius`
 
 * New feature to configure multiple radius servers.
 
-### `riak`
+`riak`
 
 * New module for storing sessions in a Riak database.
 
-### `saml`
+`saml`
 
 * Add support for overriding SAML 2.0 SP authentication request generation.
 * Add support for blacklisting encryption algorithms.
@@ -1364,92 +1364,92 @@ Released 2012-06-13.
 * Support for validating RSA-SHA256 signatures.
 * Fixes for session expiration handling.
 
-### `aselect`
+`aselect`
 
 * New module that replaces the previous module.
 * Better error handling.
 * Support for request signing.
 * Loses support for A-Select Cross.
 
-### `authcrypt`
+`authcrypt`
 
 * `authcrypt:Hash`: New authentication source for checking username & password against a list of usernames and hashed passwords.
 * `authcrypt:Htpasswd`: New authentication source for checking username & password against a `.htpasswd`-file.
 
-### `authfacebook`
+`authfacebook`
 
 * Update to latest Facebook PHP SDK.
 
-### `authorize`
+`authorize`
 
 * `authorize:Authorize`: Add flag to change the behaviour from default-deny to default-allow.
 * `authorize:Authorize`: Add flag to do simple string matching instead of regex-matching.
 
-### `authtwitter`
+`authtwitter`
 
 * Update to use the correct API endpoint.
 * Propagate "user aborted" errors back to the caller.
 * Changes to error handling, throw more relevant exceptions.
 * Store state information directly in the state array, instead of the session.
 
-### `authYubiKey`
+`authYubiKey`
 
 * Remove deprecated uses of split().
 
-### `cas`
+`cas`
 
 * Make it possible for subclasses to override finalState().
 
-### `core`
+`core`
 
 * `core:AttributeCopy`: New filter to copy attributes.
 
-### `consent`
+`consent`
 
 * Add a timeout option for the database connection.
 * Fix disabling of consent when the data store is down.
 * Simpler configuration for disabling consent for one SP or one IdP.
 * Do not connect to the database when consent is disabled for the current SP/IdP.
 
-### `consentAdmin`
+`consentAdmin`
 
 * Fix for bridged IdP setup with `userid.attribute` set in `saml20-idp-hosted` metadata.
 
-### `cron`
+`cron`
 
 * Set the From-address to be the technical contact email address.
 
-### `expirycheck`
+`expirycheck`
 
 * `expirycheck:ExpiryDate`: New module to check account expiration.
 
-### `ldap`
+`ldap`
 
 * Add a base class for authentication processing filters which fetch data from LDAP.
 * `ldap:AttributeAddUsersGroups`: Authentication processing filter that adds group information from LDAP.
 
-### `metarefresh`
+`metarefresh`
 
 * Support for blacklisting and whitelisting entities.
 * Support for conditional GET of metadata files.
 * Reuse old metadata when fetching metadata fails.
 
-### `multiauth`
+`multiauth`
 
 * Add `multiauth:preselect`-parameter, to skip the page to select authentication source.
 * Make it possible to configure the names of the authentication sources.
 * Remember the last selected authentication source.
 
-### `negotiate`
+`negotiate`
 
 * New module implementing "negotiate" authentication, which can be used for Kerberos authentication (including Windows SSO).
 
-### `oauth`
+`oauth`
 
 * Update to latest version of the OAuth library.
 * Remove support for older versions of OAuth than OAuth Rev A.
 
-### `openid`
+`openid`
 
 * Separate linkback URL from page displaying OpenID URL field.
 * Throw more relevant exceptions.
@@ -1457,15 +1457,15 @@ Released 2012-06-13.
 * Support for sending authentication requests via GET requests (with the prefer_http_redirect option).
 * Prevent deprecation warnings from the OpenID library from causing deadlocks in the class loader.
 
-### `openidProvider`
+`openidProvider`
 
 * Prevent deprecation warnings from the OpenID library from causing deadlocks in the class loader.
 
-### `radius`
+`radius`
 
 * Support for setting the "NAS-Identifier" attribute.
 
-### `saml`
+`saml`
 
 * Preserve ID-attributes on elements during signing. (Makes it possible to change the binding for some messages.)
 * Allow SAML artifacts to be received through a POST request.
@@ -1526,15 +1526,15 @@ Released 2011-10-27.
   * This makes it possible for the SP to display a warning when receiving a PartialLogout response from the IdP.
 * New `cdc` module, for setting and reading common domain cookies.
 
-### `consent`
+`consent`
 
 * Support for disabling consent for some attributes.
 
-### `ldap`
+`ldap`
 
 * `ldap:AttributeAddFromLDAP`: Extract values from multiple matching entries.
 
-### `oauth`
+`oauth`
 
 * Added support for:
   * RSASHA1 signatures
@@ -1543,11 +1543,11 @@ Released 2011-10-27.
   * verifier code
   * request parameters
 
-### `openid`
+`openid`
 
 * Support for sending custom extension arguments (e.g. UI extensions).
 
-### `saml`
+`saml`
 
 * Extract Extensions from AuthnRequest for use by custom modules when authenticating.
 * Allow signing of SP metadata.
@@ -1621,14 +1621,14 @@ Released 2011-10-27.
   Replaced with `setSubjectConfirmation`.
 * Removed several unused files & templates.
 
-### SAML 2 IdP
+`SAML2 IdP`
 
 * Support for generation of NameID values via [processing filters](./saml:nameid)
 * Obey the NameIDPolicy Format in authentication request.
 * Allow AuthnContextClassRef to be set by processing filters.
 * Rework iframe logout page to not rely on cookies.
 
-### SAML 2 SP
+`SAML2 SP`
 
 * Support SOAP logout.
 * Various fixes to adhere more closely to the specification.
@@ -1640,50 +1640,50 @@ Released 2011-10-27.
 * Add specific options for signing and verifying authentication request and logout messages.
 * `saml:NameIDAttribute` filter for extracting NameID from authentication response.
 
-### SAML 1 IdP
+`SAML1 IdP`
 
 * Add `urn:mace:shibboleth:1.0` as supported protocol in generated metadata.
 
-### SAML 1 SP
+`SAML1 SP`
 
 * Support for IdP initiated authentication.
 
-### `aggregator`
+`aggregator`
 
 * Allow metadata generation from command line.
 
-### `authfacebook`
+`authfacebook`
 
 * Change attribute names.
 
-### `casserver`
+`casserver`
 
 * Support for proxying.
 * Add ttl for tickets.
 
-### `core`
+`core`
 
 * `core:AttributeLimit`: Make it possible to specify a default set of attributes.
 * Make the SP metadata available on the login pages.
 
-### `discoPower`
+`discoPower`
 
 * Sort IdPs without a name (where we only have an entityID) last in the list.
 * CDC cookie support.
 
-### `exampleAuth`
+`exampleAuth`
 
 * Add example of integration with external authentication page.
 
-### `ldap`
+`ldap`
 
 * Add `ldap:AttributeAddFromLDAP` filter for adding attributes from a LDAP directory.
 
-### `metarefresh`
+`metarefresh`
 
 * Don't stop updates on the first exception.
 
-### `openid`
+`openid`
 
 * Don't require access to the PHP session.
 * Remove OpenID test page. (May as well use the normal test pages.)
@@ -1691,15 +1691,15 @@ Released 2011-10-27.
 * Add `target` option, for directing authentication to a specific OpenID provider.
 * Add `realm` option, for specifying the realm we should send to the OpenID provider.
 
-### `portal`
+`portal`
 
 * Make it possible to register pages from modules, and not only from configuration.
 
-### `statistics`
+`statistics`
 
 * New y-axis scaling algorithm
 
-### `twitter`
+`twitter`
 
 * Change attribute names returned from twitter.
 
@@ -1749,11 +1749,11 @@ Released 2010-05-31.
 * The deprecated functions `init(...)` and `setAuthenticated(...) in the `SimpleSAML_Session` class have been removed.
 * Configuration check and metadata check was removed, as they were often wrong.
 
-### SAML 2 SP
+`SAML2 SP`
 
 * SAML 2.0 HTTP-Artifact support on the [SP](./simplesamlphp-artifact-sp).
 
-### SAML 2 IdP
+`SAML2 IdP`
 
 * SAML 2.0 HTTP-Artifact support on the [IdP](./simplesamlphp-artifact-idp).
 * Support for sending PartialLogout status code in logout response.
@@ -1769,56 +1769,56 @@ Released 2010-05-31.
 * Support for passing parameters to the authentication module.
   This can be used to specify SAML 2 parameters, such as isPassive and ForceAuthn.
 
-### `adfs`
+`adfs`
 
 * Move to new IdP core.
 
-### `casserver`
+`casserver`
 
 * Collect all endpoints in a single file.
 * Fix prefix on the tickets.
 
-### `consent`
+`consent`
 
 * Support for deactivating consent for specific services.
 
-### `consentAdmin`
+`consentAdmin`
 
 * Support for the SAML SP module.
 
-### `core`
+`core`
 
 * New filter: [`core:PHP`](./core:authproc_php), which allows processing of attributes with arbitrary PHP code.
 * Support for multiple target attributes in [`core:AttributeMap`](./core:authproc_attributemap).
 * New filter: [`core:ScopeFromAttribute`](./core:authproc_scopefromattribute), which allows the creation an attribute based on the scope of another attribute.
 * Support for a target attribute in [`core:AttributeAlter`](./core:authproc_attributealter).
 
-### `discoPower`
+`discoPower`
 
 * Support for new scoring algorithm.
 
-### `ldap`
+`ldap`
 
 * SASL support in LDAPMulti
 
-### `ldapstatus`
+`ldapstatus`
 
 * This module was removed, as it was very specific for Feide.
 
-### `multiauth`
+`multiauth`
 
 * Support for specifying the target authentication source through a request parameter.
 
-### `oauth`
+`oauth`
 
 * Configurable which authentication source should be used.
 
-### `openidProvider`
+`openidProvider`
 
 * OpenID 2.0 support.
 * XRDS generation support.
 
-### `saml`
+`saml`
 
 * Support for specifying parameters for authentication request.
 * Add AttributeConsumingService to generated metadata.
@@ -1876,41 +1876,41 @@ Released 2009-11-05. Revision 1937.
 * [`radius`](./radius:radius)
 * [`saml`](./saml:sp)
 
-### `aggregator`:
+`aggregator`
 
 * Add ARP + ARP signing functionality to the aggregator.
 * Improvements to the aggregator module. Added documentation, and re-written more OO-oriented.
 * Add support for reconstructing XML where XML for an entity is already cached.
 * Add support for excluding tags in metadata aggregator.
 
-### `AuthMemCookie`:
+`AuthMemCookie`
 
 * Delete the session cookie when deleting the session.
 * Support for authentication sources.
 * Set expiry time of session data when saving to memcache.
 * Support multiple memcache servers.
 
-### `cas`:
+`cas`
 
 * Added support for attributes in <cas:serviceResponse>.
 
-### `consent`:
+`consent`
 
 * Support for hiding some attribute values.
 
-### `consentAdmin`:
+`consentAdmin`
 
 * Added config option to display description.
 
-### `core`:
+`core`
 
 * New WarnShortSSOInterval filter.
 
-### `discopower`:
+`discopower`
 
 * Live search in discopower-module.
 
-### `ldap`:
+`ldap`
 
 * Support for proxy authentication.
 * Add 'debug' and 'timeout' options.
@@ -1918,7 +1918,7 @@ Released 2009-11-05. Revision 1937.
 * Allow search.base to be an array.
 * (LDAPMulti) Add support for including the organization as part of the username.
 
-### `ldapstatus`:
+`ldapstatus`
 
 * Do a connect-test to all ip-addresses for a hostname.
 * Check wheter hostname exists before attempting to connect.
@@ -1926,21 +1926,21 @@ Released 2009-11-05. Revision 1937.
 * Check schema version.
 * Add command line tab to single LDAP status page for easier debugging.
 
-### `logpeek`:
+`logpeek`
 
 * Blockwise reading of logfile for faster execution.
 
-### `metarefresh`:
+`metarefresh`
 
 * Adding support for generating Shibboleth ARP files.
 * Add 'serialize' metadata format.
 
-### `preprodwarning`:
+`preprodwarning`
 
 * Don't show warning in passive request.
 * Focus on continue-button.
 
-### SAML:
+`saml`
 
 * Support for multiple AssertionConsumerService endpoints.
 * SAML 1 artifact support on the SP side.
@@ -1956,7 +1956,7 @@ Released 2009-11-05. Revision 1937.
 * Sign both the assertion and the response element by default.
 * Support for sending XML attribute values from the IdP.
 
-### `statistics`:
+`statistics`
 
 * Extended Google chart encoding... Add option of alternative compare plot in graph...
 * Added support for Ratio type reports in the statistics module..
