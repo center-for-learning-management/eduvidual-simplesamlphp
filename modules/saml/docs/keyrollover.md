@@ -19,7 +19,7 @@ Add the new key to SimpleSAMLphp
 
 Where you add the new key depends on whether you are doing key rollover for a service provider or an identity provider.
 If you are doing key rollover for a service provider, the new key must be added to `config/authsources.php`.
-To do key rollover for an identity provider, you must add the new key to `metadata/saml20-idp-hosted.php`.
+To do key rollover for an identity provider, you must add the new key to `metadata/saml20-idp-hosted.php` and/or `metadata/shib13-idp-hosted.php`.
 If you are changing the keys for both an service provider and identity provider at the same time, you must update both locations.
 
 The new certificate, private key and private key passphrase are added to the configuration with the prefix `new_`:
@@ -33,7 +33,7 @@ This ensures that both those entities that use your old metadata and those that 
 
 In `config/authsources.php`:
 
-    'default-sp' => [
+    'default-sp' => array(
         'saml:SP',
         'privatekey' => 'old.pem',
         'certificate' => 'old.crt',
@@ -44,11 +44,11 @@ In `config/authsources.php`:
         'new_certificate' => 'new.crt',
         // When new private key is passphrase protected.
         'new_privatekey_pass' => '<new-secret>',
-    ],
+    ),
 
 In `metadata/saml20-idp-hosted.php`:
 
-    $metadata['urn:x-simplesamlphp:idp'] = [
+    $metadata['__DYNAMIC:1__'] = array(
         'host' => '__DEFAULT__',
         'auth' => 'example-userpass',
         'privatekey' => 'old.pem',
@@ -60,7 +60,7 @@ In `metadata/saml20-idp-hosted.php`:
         'new_certificate' => 'new.crt',
         // When new private key is passphrase protected.
         'new_privatekey_pass' => '<new-secret>',
-    ];
+    );
 
 
 Distribute your new metadata
@@ -86,24 +86,24 @@ This will cause your old key to be removed from your metadata.
 
 In `config/authsources.php`:
 
-    'default-sp' => [
+    'default-sp' => array(
         'saml:SP',
         'certificate' => 'new.crt',
         'privatekey' => 'new.pem',
         // When private key is passphrase protected.
         'privatekey_pass' => '<new-secret>',
-    ],
+    ),
 
 In `metadata/saml20-idp-hosted.php`:
 
-    $metadata['urn:x-simplesamlphp:idp'] = [
+    $metadata['__DYNAMIC:1__'] = array(
         'host' => '__DEFAULT__',
         'auth' => 'example-userpass',
         'certificate' => 'new.crt',
         'privatekey' => 'new.pem',
         // When private key is passphrase protected.
         'privatekey_pass' => '<new-secret>',
-    ];
+    );
 
 
 

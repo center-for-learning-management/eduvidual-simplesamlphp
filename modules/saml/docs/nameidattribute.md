@@ -29,36 +29,36 @@ Examples
 
 Minimal configuration:
 
-    'default-sp' => [
+    'default-sp' => array(
         'saml:SP',
-        'authproc' => [
+        'authproc' => array(
             20 => 'saml:NameIDAttribute',
-        ],
-    ],
+        ),
+    ),
 
 Custom attribute name:
 
-    'default-sp' => [
+    'default-sp' => array(
         'saml:SP',
-        'authproc' => [
-            20 => [
+        'authproc' => array(
+            20 => array(
                 'class' => 'saml:NameIDAttribute',
                 'attribute' => 'someattributename',
-            ],
-        ],
-    ],
+            ),
+        ),
+    ),
 
 Only extract the value of the NameID.
 
-    'default-sp' => [
+    'default-sp' => array(
         'saml:SP',
-        'authproc' => [
-            20 => [
+        'authproc' => array(
+            20 => array(
                 'class' => 'saml:NameIDAttribute',
                 'format' => '%V',
-            ],
-        ],
-    ],
+            ),
+        ),
+    ),
 
 See also
 --------

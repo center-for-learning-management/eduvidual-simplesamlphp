@@ -5,42 +5,44 @@ declare(strict_types=1);
 namespace SimpleSAML\Test\Web;
 
 use PHPUnit\Framework\TestCase;
-use SimpleSAML\TestUtils\BuiltInServer;
+use SimpleSAML\Test\BuiltInServer;
 
 /**
  * Simple test for the www/index.php script.
  *
  * This test is intended mostly as a demonstration of how to test the public web interface in SimpleSAMLphp.
  *
+ * @author Jaime Pérez Crespo <jaime.perez@uninett.no>
  * @package SimpleSAMLphp
  */
 class IndexTest extends TestCase
 {
     /**
-     * @var \SimpleSAML\TestUtils\BuiltInServer
+     * @var \SimpleSAML\Test\BuiltInServer
      */
-    protected BuiltInServer $server;
+    protected $server;
 
     /**
      * @var string
      */
-    protected string $server_addr;
+    protected $server_addr;
 
     /**
      * @var int
      */
-    protected int $server_pid;
+    protected $server_pid;
 
     /**
      * @var string
      */
-    protected string $shared_file;
+    protected $shared_file;
 
 
     /**
      * The setup method that is run before any tests in this class.
+     * @return void
      */
-    protected function setup(): void
+    protected function setup()
     {
         $this->server = new BuiltInServer('configLoader');
         $this->server_addr = $this->server->start();
@@ -53,8 +55,9 @@ class IndexTest extends TestCase
 
     /**
      * @param array $config
+     * @return void
      */
-    protected function updateConfig(array $config): void
+    protected function updateConfig(array $config)
     {
         @unlink($this->shared_file);
         $config = "<?php\n\$config = " . var_export($config, true) . ";\n";
@@ -64,8 +67,9 @@ class IndexTest extends TestCase
 
     /**
      * A simple test to make sure the index.php file redirects appropriately to the right URL.
+     * @return void
      */
-    public function testRedirection(): void
+    public function testRedirection()
     {
         // test most basic redirection
         $this->updateConfig([
@@ -74,9 +78,9 @@ class IndexTest extends TestCase
         $resp = $this->server->get('/index.php', [], [
             CURLOPT_FOLLOWLOCATION => 0,
         ]);
-        $this->assertEquals('303', $resp['code']);
+        $this->assertEquals('302', $resp['code']);
         $this->assertEquals(
-            'http://example.org/simplesaml/module.php/core/welcome',
+            'http://example.org/simplesaml/module.php/core/frontpage_welcome.php',
             $resp['headers']['Location']
         );
 
@@ -87,9 +91,9 @@ class IndexTest extends TestCase
         $resp = $this->server->get('/index.php', [], [
             CURLOPT_FOLLOWLOCATION => 0,
         ]);
-        $this->assertEquals('303', $resp['code']);
+        $this->assertEquals('302', $resp['code']);
         $this->assertEquals(
-            'https://example.org/module.php/core/welcome',
+            'https://example.org/module.php/core/frontpage_welcome.php',
             $resp['headers']['Location']
         );
 
@@ -100,35 +104,19 @@ class IndexTest extends TestCase
         $resp = $this->server->get('/index.php', [], [
             CURLOPT_FOLLOWLOCATION => 0,
         ]);
-        $this->assertEquals('303', $resp['code']);
+        $this->assertEquals('302', $resp['code']);
         $this->assertEquals(
-            'http://' . $this->server_addr . '/simplesaml/module.php/core/welcome',
+            'http://' . $this->server_addr . '/simplesaml/module.php/core/frontpage_welcome.php',
             $resp['headers']['Location']
         );
     }
 
-    /**
-     * Test the frontpage.redirect config option
-     */
-    public function testRedirectionFrontpageRedirectOption(): void
-    {
-        $this->updateConfig([
-                'frontpage.redirect' => 'https://www.example.edu/'
-        ]);
-        $resp = $this->server->get('/index.php', [], [
-            CURLOPT_FOLLOWLOCATION => 0,
-        ]);
-        $this->assertEquals('303', $resp['code']);
-        $this->assertEquals(
-            'https://www.example.edu/',
-            $resp['headers']['Location']
-        );
-    }
 
     /**
      * The tear down method that is executed after all tests in this class.
+     * @return void
      */
-    protected function tearDown(): void
+    protected function tearDown()
     {
         unlink($this->shared_file);
         $this->server->stop();

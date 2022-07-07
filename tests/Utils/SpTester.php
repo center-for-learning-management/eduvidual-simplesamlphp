@@ -7,7 +7,6 @@ namespace SimpleSAML\Test\Utils;
 use ReflectionObject;
 use SAML2\AuthnRequest;
 use SAML2\Binding;
-use SAML2\LogoutRequest;
 use SimpleSAML\Configuration;
 use SimpleSAML\Module\saml\Auth\Source\SP;
 
@@ -21,16 +20,18 @@ class SpTester extends SP
     /**
      * @param array $info
      * @param array $config
+     * @return void
      */
-    public function __construct(array $info, array $config)
+    public function __construct($info, $config)
     {
         parent::__construct($info, $config);
     }
 
 
     /**
+     * @return void
      */
-    public function startSSO2Test(Configuration $idpMetadata, array $state): void
+    public function startSSO2Test(Configuration $idpMetadata, array $state)
     {
         $reflector = new ReflectionObject($this);
         $method = $reflector->getMethod('startSSO2');
@@ -41,29 +42,16 @@ class SpTester extends SP
 
     /**
      * override the method that sends the request to avoid sending anything
+     * @return void
      */
-    public function sendSAML2AuthnRequest(Binding $binding, AuthnRequest $ar): void
+    public function sendSAML2AuthnRequest(array &$state, Binding $binding, AuthnRequest $ar)
     {
         // Exit test. Continuing would mean running into a assert(FALSE)
         throw new ExitTestException(
             [
+                'state'   => $state,
                 'binding' => $binding,
                 'ar'      => $ar,
-            ]
-        );
-    }
-
-
-    /**
-     * override the method that sends the request to avoid sending anything
-     */
-    public function sendSAML2LogoutRequest(Binding $binding, LogoutRequest $lr): void
-    {
-        // Exit test. Continuing would mean running into a assert(FALSE)
-        throw new ExitTestException(
-            [
-                'binding' => $binding,
-                'lr'      => $lr,
             ]
         );
     }

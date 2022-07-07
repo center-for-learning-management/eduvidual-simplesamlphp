@@ -8,7 +8,7 @@ SimpleSAMLphp modules
 -->
 
 
-[TOC]
+<!-- {{TOC}} -->
 
 This document describes how the module system in SimpleSAMLphp
 works. It descibes what types of modules there are, how they are
@@ -46,13 +46,23 @@ Each SimpleSAMLphp module is stored in a directory under the
 `modules`-directory. The module directory contains the following
 directories and files:
 
-locales
+default-disable
+:   The presence of this file indicates that the module is disabled
+    by default. It can be enabled using the `module.enable`
+    option in `config.php`.
+
+default-enable
+:   The presence of this file indicates that the module is enabled
+    by default. It can be disabled using the `module.enable`
+    option in `config.php`.
+
+dictionaries
 :   This directory contains dictionaries which belong to this
     module. To use a dictionary stored in a module, the extended tag
     names can be used:
     `{<module name>:<dictionary name>:<tag name>}` For
     example, `{example:login:hello}` will look up `hello` in
-    `modules/example/locales/<lang>/login.po`.
+    `modules/example/dictionaries/login.php`.
 
 :   It is also possible to specify
     `<module name>:<dictionary name>` as the default
@@ -154,7 +164,7 @@ this:
 To use this authentication source in a SAML 2.0 IdP, set the
 `auth`-option of the IdP to `'example-static'`:
 
-    'https://example.org/saml-idp' => [
+    '__DYNAMIC:1__' => [
       'host' => '__DEFAULT__',
       'privatekey' => 'example.org.pem',
       'certificate' => 'example.org.crt',
@@ -205,7 +215,12 @@ function named `<module name>_hook_<hook name>`.
 Each hook function accepts a single argument. This argument will be 
 passed by reference, which allows each hook to update that argument.
 
-For an example of hook usage, see the cron module, which adds a link
-to its information page in the Configuration section of the admin
-module, through the file `modules/cron/hooks/hook_configpage.php`.
+There is currently a single user of the hook interface - the front 
+page. The front page defines a hook named `frontpage`, which allows 
+modules to add things to the different sections on the front page. For 
+an example of this, see the `modules/modinfo/hooks/hook_frontpage.php` 
+file in the
+[modinfo module](https://github.com/simplesamlphp/simplesamlphp-module-modinfo).
+
+
 

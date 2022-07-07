@@ -1,7 +1,14 @@
 SimpleSAMLphp Identity Provider Advanced Topics
 ===============================================
 
-[TOC]
+<!-- 
+	This file is written in Markdown syntax. 
+	For more information about how to use the Markdown syntax, read here:
+	http://daringfireball.net/projects/markdown/syntax
+-->
+
+
+<!-- {{TOC}} -->
 
 AJAX iFrame Single Log-Out
 --------------------------
@@ -14,7 +21,7 @@ If you have read about the AJAX iFrame Single Log-Out approach at Andreas' blog 
 Attribute Release Consent
 -------------------------
 
-The attribute release consent is documented in a [separate document](/docs/contrib_modules/consent/consent.html).
+The attribute release consent is documented in a [separate document](./consent:consent).
 
 
 Support for bookmarking the login page
@@ -48,6 +55,31 @@ Consumer URL with the `ConsumerURL` parameter.
 For compatibility with certain SPs, SimpleSAMLphp will also accept the
 `providerId`, `target` and `shire` parameters as aliases for `spentityid`,
 `RelayState` and `ConsumerURL`, respectively.
+
+
+### IdP first with SAML 1.1
+
+A SAML 1.1 SP does not send an authentication request to the IdP, but instead triggers IdP initiated authentication directly.
+If you want to do it manually, you can access the following URL:
+
+	https://idp.example.org/simplesaml/shib13/idp/SSOService.php?providerId=urn:mace:feide.no:someservice&shire=https://sp.example.org/acs-endpoint&target=https://sp.example.org/somepage
+
+The parameters are as follows:
+
+`providerID`
+:   The entityID of the SP.
+    This parameter is required.
+
+`shire`
+:   The AssertionConsumerService endpoint of the SP.
+    This parameter is required.
+
+`target`
+:   The target parameter the SP should receive with the authentication response.
+    This is often the page the user should be sent to after authentication.
+    This parameter is optional for the IdP, but must be specified if the SP you are targeting is running SimpleSAMLphp.
+
+:   *Note*: This parameter must be sent as `target` (with lowercase letters) when starting the authentication, while it is sent as `TARGET` (with uppercase letters) in the authentication response.
 
 
 IdP-initiated logout

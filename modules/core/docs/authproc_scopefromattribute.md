@@ -22,10 +22,10 @@ Example
 
 Set the `scope` attribute to the scope from the `eduPersonPrincipalName` attribute:
 
-    'authproc' => [
-        50 => [
+    'authproc' => array(
+        50 => array(
             'class' => 'core:ScopeFromAttribute',
             'sourceAttribute' => 'eduPersonPrincipalName',
             'targetAttribute' => 'scope',
-        ],
-    ],
+        ),
+    ),

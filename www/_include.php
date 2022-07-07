@@ -1,34 +1,23 @@
 <?php
 
-declare(strict_types=1);
-
 // initialize the autoloader
-require_once(dirname(dirname(__FILE__)) . '/src/_autoload.php');
+require_once(dirname(dirname(__FILE__)) . '/lib/_autoload.php');
 
-use SAML2\Compat\ContainerSingleton;
-use SimpleSAML\Compat\SspContainer;
-use SimpleSAML\Configuration;
-use SimpleSAML\Error;
-use SimpleSAML\Logger;
-use SimpleSAML\Module;
-use SimpleSAML\Utils;
+// enable assertion handler for all pages
+\SimpleSAML\Error\Assertion::installHandler();
 
-/**
- * show error page on unhandled exceptions
- * @param \Throwable $exception
- * @return void
- */
-function SimpleSAML_exception_handler(Throwable $exception): void
+// show error page on unhandled exceptions
+function SimpleSAML_exception_handler($exception)
 {
-    Module::callHooks('exception_handler', $exception);
+    \SimpleSAML\Module::callHooks('exception_handler', $exception);
 
-    if ($exception instanceof Error\Error) {
+    if ($exception instanceof \SimpleSAML\Error\Error) {
         $exception->show();
-    } elseif ($exception instanceof Exception) {
-        $e = new Error\Error('UNHANDLEDEXCEPTION', $exception);
+    } elseif ($exception instanceof \Exception) {
+        $e = new \SimpleSAML\Error\Error('UNHANDLEDEXCEPTION', $exception);
         $e->show();
     } elseif (class_exists('Error') && $exception instanceof \Error) {
-        $e = new Error\Error('UNHANDLEDEXCEPTION', $exception);
+        $e = new \SimpleSAML\Error\Error('UNHANDLEDEXCEPTION', $exception);
         $e->show();
     }
 }
@@ -36,22 +25,9 @@ function SimpleSAML_exception_handler(Throwable $exception): void
 set_exception_handler('SimpleSAML_exception_handler');
 
 // log full backtrace on errors and warnings
-/**
- * @param int $errno
- * @param string $errstr
- * @param string|null $errfile
- * @param int $errline
- * @param string|null $errcontext
- * @return false
- */
-function SimpleSAML_error_handler(
-    $errno,
-    string $errstr,
-    ?string $errfile = null,
-    int $errline = 0,
-    /** @scrutinizer-unused */ $errcontext = null
-): bool {
-    if (Logger::isErrorMasked($errno)) {
+function SimpleSAML_error_handler($errno, $errstr, $errfile = null, $errline = 0, $errcontext = null)
+{
+    if (\SimpleSAML\Logger::isErrorMasked($errno)) {
         // masked error
         return false;
     }
@@ -65,7 +41,7 @@ function SimpleSAML_error_handler(
 
     // show an error with a full backtrace
     $context = (is_null($errfile) ? '' : " at $errfile:$errline");
-    $e = new Error\Exception('Error ' . $errno . ' - ' . $errstr . $context);
+    $e = new \SimpleSAML\Error\Exception('Error ' . $errno . ' - ' . $errstr . $context);
     $e->logError();
 
     // resume normal error processing
@@ -75,17 +51,12 @@ function SimpleSAML_error_handler(
 set_error_handler('SimpleSAML_error_handler');
 
 try {
-    Configuration::getInstance();
-} catch (Exception $e) {
-    throw new Error\CriticalConfigurationError(
+    \SimpleSAML\Configuration::getInstance();
+} catch (\Exception $e) {
+    throw new \SimpleSAML\Error\CriticalConfigurationError(
         $e->getMessage()
     );
 }
 
 // set the timezone
-$timeUtils = new Utils\Time();
-$timeUtils->initTimezone();
-
-// set the SAML2 container
-$container = new SspContainer();
-ContainerSingleton::setContainer($container);
+\SimpleSAML\Utils\Time::initTimezone();

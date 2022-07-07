@@ -1,13 +1,11 @@
 <?php
 
-declare(strict_types=1);
-
-namespace SimpleSAML;
-
 require_once('_include.php');
 
-$config = Configuration::getInstance();
-$httpUtils = new Utils\HTTP();
+$config = \SimpleSAML\Configuration::getInstance();
 
-$redirect = $config->getOptionalString('frontpage.redirect', Module::getModuleURL('core/welcome'));
-$httpUtils->redirectTrustedURL($redirect);
+if ($config->getBoolean('usenewui', false)) {
+    \SimpleSAML\Utils\HTTP::redirectTrustedURL(SimpleSAML\Module::getModuleURL('core/login'));
+}
+
+\SimpleSAML\Utils\HTTP::redirectTrustedURL(SimpleSAML\Module::getModuleURL('core/frontpage_welcome.php'));

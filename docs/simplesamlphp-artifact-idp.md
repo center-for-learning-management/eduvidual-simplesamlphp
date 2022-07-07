@@ -35,7 +35,7 @@ Enabling artifact on the IdP
 
 To enable the IdP to send artifacts, you must add the `saml20.sendartifact` option to the `saml20-idp-hosted` metadata file:
 
-    $metadata['https://example.org/saml-idp'] = [
+    $metadata['__DYNAMIC:1__'] = [
         [....]
         'auth' => 'example-userpass',
         'saml20.sendartifact' => TRUE,
@@ -68,12 +68,12 @@ In general, that should look something like:
     'AssertionConsumerService' => array (
         [
             'Binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST',
-            'Location' => 'https://sp.example.org/simplesaml/module.php/saml/sp/assertionConsumerService/default-sp',
+            'Location' => 'https://sp.example.org/simplesaml/module.php/saml/sp/saml2-acs.php/default-sp',
             'index' => 0,
         ],
         [
             'Binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact',
-            'Location' => 'https://sp.example.org/simplesaml/module.php/saml/sp/assertionConsumerService/default-sp',
+            'Location' => 'https://sp.example.org/simplesaml/module.php/saml/sp/saml2-acs.php/default-sp',
             'index' => 2,
         ],
     ),
@@ -89,7 +89,7 @@ You may therefore have to add the webserver certificate to the metadata that you
 To do this, you need to set the `https.certificate` option in the `saml20-idp-hosted` metadata file.
 That option should refer to a file containing the webserver certificate.
 
-    $metadata['https://example.org/saml-idp'] = [
+    $metadata['__DYNAMIC:1__'] = [
         [....]
         'auth' => 'example-userpass',
         'saml20.sendartifact' => TRUE,

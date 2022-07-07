@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace SimpleSAML\Test;
 
 use org\bovigo\vfs\vfsStream;
-use org\bovigo\vfs\vfsStreamDirectory;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use SimpleSAML\Configuration;
@@ -20,7 +19,7 @@ class SigningTestCase extends TestCase
 {
     // openssl genrsa -out ca.key.pem 2048
     /** @var string $ca_private_key */
-    protected string $ca_private_key = <<<'NOWDOC'
+    protected $ca_private_key = <<<'NOWDOC'
 -----BEGIN RSA PRIVATE KEY-----
 MIIEpQIBAAKCAQEAtj5GuvnC5aCg8bhq2Yy4isp/uXtRRWKhbB5aYP7/1DwwwQ1Z
 LtBosBAA5SMD4s4L9w/bbJVVVAzhc9cpe2vDYLe1faUZlvOzJv/JuH/ux5NRkgmx
@@ -52,7 +51,7 @@ NOWDOC;
 
     // openssl req -key ca.key.pem -new -x509 -days 3650 -out ca.cert.pem
     /** @var string $ca_certificate */
-    private string $ca_certificate = <<<'NOWDOC'
+    private $ca_certificate = <<<'NOWDOC'
 -----BEGIN CERTIFICATE-----
 MIIDtjCCAp6gAwIBAgIJAII4rW68Q+IsMA0GCSqGSIb3DQEBCwUAMHAxCzAJBgNV
 BAYTAkFVMRMwEQYDVQQIDApTb21lLVN0YXRlMSEwHwYDVQQKDBhJbnRlcm5ldCBX
@@ -79,7 +78,7 @@ NOWDOC;
 
     // openssl genrsa -out good.key.pem 2048
     /** @var string $good_private_key */
-    protected string $good_private_key = <<<'NOWDOC'
+    protected $good_private_key = <<<'NOWDOC'
 -----BEGIN RSA PRIVATE KEY-----
 MIIEowIBAAKCAQEAqmNn4bt/jrMHgoWtwXLc2ok17BHh1O5ETbn9rK3KFjk3BXp5
 3aGveill+KbW7SgriGZSa1KBE2uaQy2mZpiBQqFrLcgKhtzaCNLyBvKOozQhn/XN
@@ -119,7 +118,7 @@ NOWDOC;
     //      -in good.csr.pem \
     //      -out good.cert.pem
     /** @var string $good_certificate */
-    protected string $good_certificate = <<<'NOWDOC'
+    protected $good_certificate = <<<'NOWDOC'
 -----BEGIN CERTIFICATE-----
 MIIDZTCCAk0CCQC+sxqJmyko6TANBgkqhkiG9w0BAQsFADBwMQswCQYDVQQGEwJB
 VTETMBEGA1UECAwKU29tZS1TdGF0ZTEhMB8GA1UECgwYSW50ZXJuZXQgV2lkZ2l0
@@ -144,28 +143,28 @@ hQc0xnrLQ255SjMn+nQtMkVSuKwAUqaAP1ByyiVbN1cBlHnMiJCjvBI58bSTdlVK
 NOWDOC;
 
     /** @var string */
-    protected string $good_private_key_file;
+    protected $good_private_key_file;
 
     /** @var string */
-    protected string $good_certificate_file;
+    protected $good_certificate_file;
 
     /** @var string */
-    protected string $certdir;
+    protected $certdir;
 
     /** @var \org\bovigo\vfs\vfsStreamDirectory */
-    protected VfsStreamDirectory $root;
+    protected $root;
 
     /** @var string */
-    protected string $root_directory;
+    protected $root_directory;
 
     /** @var string */
-    protected string $ca_private_key_file;
+    protected $ca_private_key_file;
 
     /** @var string */
-    protected string $ca_certificate_file;
+    protected $ca_certificate_file;
 
     /** @var \SimpleSAML\Configuration */
-    protected Configuration $config;
+    protected $config;
 
     protected const ROOTDIRNAME = 'testdir';
     protected const DEFAULTCERTDIR = 'certdir';
@@ -190,8 +189,9 @@ NOWDOC;
 
 
     /**
+     * @return void
      */
-    public function setUp(): void
+    public function setUp()
     {
         $this->root = vfsStream::setup(
             self::ROOTDIRNAME,
@@ -215,8 +215,9 @@ NOWDOC;
 
 
     /**
+     * @return void
      */
-    public function tearDown(): void
+    public function tearDown()
     {
         $this->clearInstance($this->config, Configuration::class, []);
     }
@@ -226,6 +227,7 @@ NOWDOC;
      * @param \SimpleSAML\Configuration $service
      * @param class-string $className
      * @param mixed|null $value
+     * @return void
      */
     protected function clearInstance(Configuration $service, string $className, $value = null): void
     {

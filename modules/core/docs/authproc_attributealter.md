@@ -1,5 +1,5 @@
 `core:AttributeAlter`
-=====================
+==========
 
 This filter can be used to substitute and replace different parts of the attribute values based on regular expressions.
 It can also be used to create new attributes based on existing values, or even to remove blacklisted values from
@@ -37,11 +37,6 @@ Parameters
 `%remove`
 :   Indicates that the whole value of the attribute should be removed completely if there is a match.
     If no other values exist, the attribute will be removed completely.
-    This parameter is OPTIONAL.
-
-`%merge`
-:   Indicates whether the altered values must be merged with the target attribute values. The default
-    behaviour is to overwrite the target attribute completely.
     This parameter is OPTIONAL.
     
 Examples

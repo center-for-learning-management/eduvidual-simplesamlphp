@@ -1,7 +1,14 @@
 Cron
 =============================
 
-[TOC]
+<!-- 
+	This file is written in Markdown syntax. 
+	For more information about how to use the Markdown syntax, read here:
+	http://daringfireball.net/projects/markdown/syntax
+-->
+
+
+<!-- {{TOC}} -->
 
 Introduction
 ------------
@@ -10,13 +17,6 @@ The cron module allows you to do tasks regularly, by setting up a cron
 job that calls a hook in SimpleSAMLphp.  This will invoke
 `hooks/hook_cron.php` in any enabled modules
 
-Modules, like e.g. the metarefresh module, that want to invoke tasks
-on set times, can register cron hooks for use by this module. You in turn
-configure your system's `cron` or other time based execution functionality
-to periodically trigger this module's endpoint, so all registered hooks
-will be executed at that time. This module also takes care of reporting
-back the result and provides an interface in SimpleSAMLphp's admin
-panel to trigger jobs manually.
 
 Preparations
 ------------
@@ -33,13 +33,13 @@ Configuring the cron module
 
 The configuration (`config/module_cron.php`) should look similar to this:
 
-	$config = [
+	$config = array (
 	       'key' => 'RANDOM_KEY',
-	       'allowed_tags' => ['daily', 'hourly', 'frequent'],
+	       'allowed_tags' => array('daily', 'hourly', 'frequent'),
 	       'debug_message' => TRUE,
 	       'sendemail' => TRUE,
 	
-	];
+	);
 
 Bear in mind that the key is used as a security feature, to restrict
 access to your cron. Therefore, you need to make sure that the string

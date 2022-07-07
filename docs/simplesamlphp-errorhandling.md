@@ -1,13 +1,20 @@
 Exception and error handling in SimpleSAMLphp
 =============================================
 
-[TOC]
+<!--
+	This file is written in Markdown syntax.
+	For more information about how to use the Markdown syntax, read here:
+	http://daringfireball.net/projects/markdown/syntax
+-->
+
+
+<!-- {{TOC}} -->
 
 This document describes the way errors and exceptions are handled in authentication sources and authentication processing filters.
 The basic goal is to be able to throw an exception during authentication, and then have that exception transported back to the SP in a way that the SP understands.
 
 This means that internal SimpleSAMLphp exceptions must be mapped to transport specific error codes for the various transports that are supported by SimpleSAMLphp.
-E.g.: When a `\SAML2\Exception\Protocol\NoPassiveException` error is thrown by an authentication processing filter in a SAML 2.0 IdP, we want to map that exception to the `urn:oasis:names:tc:SAML:2.0:status:NoPassive` status code.
+E.g.: When a `\SimpleSAML\Error\NoPassive` error is thrown by an authentication processing filter in a SAML 2.0 IdP, we want to map that exception to the `urn:oasis:names:tc:SAML:2.0:status:NoPassive` status code.
 That status code should then be returned to the SP.
 
 
@@ -18,8 +25,7 @@ How you throw an exception depends on where you want to throw it from.
 The simplest case is if you want to throw it during the `authenticate()`-method in an authentication module or during the `process()`-method in a processing filter.
 In those methods, you can just throw an exception:
 
-    public function process(array &$state): void
-    {
+    public function process(&$state) {
         if ($state['something'] === false) {
             throw new \SimpleSAML\Error\Exception('Something is wrong...');
         }
@@ -34,6 +40,7 @@ If you want to throw an exception outside of those methods, i.e. after you have 
     $state = \SimpleSAML\Auth\State::loadState($id, 'somestage...');
     \SimpleSAML\Auth\State::throwException($state,
         new \SimpleSAML\Error\Exception('Something is wrong...'));
+    ?>
 
 The `\SimpleSAML\Auth\State::throwException` function will then transfer your exception to the appropriate error handler.
 
@@ -54,7 +61,7 @@ Returning specific SAML 2 errors
 
 By default, all thrown exceptions will be converted to a generic SAML 2 error.
 In some cases, you may want to convert the exception to a specific SAML 2 status code.
-For example, the `\SAML2\Exception\Protocol\NoPassiveException` exception should be converted to a SAML 2 status code with the following properties:
+For example, the `\SimpleSAML\Error\NoPassive` exception should be converted to a SAML 2 status code with the following properties:
 
 * The top-level status code should be `urn:oasis:names:tc:SAML:2.0:status:Responder`.
 * The second-level status code should be `urn:oasis:names:tc:SAML:2.0:status:NoPassive`.
@@ -90,7 +97,7 @@ This is handled by the `toException()` method in `\SimpleSAML\Module\saml\Error`
 The assertion consumer script of the SAML 2 authentication source (`modules/saml2/sp/acs.php`) uses this method.
 The result is that generic exceptions are thrown from that authentication source.
 
-For example, `NoPassive` errors will be converted back to instances of `\SAML2\Exception\Protocol\NoPassiveException`.
+For example, `NoPassive` errors will be converted back to instances of `\SimpleSAML\Error\NoPassive`.
 
 
 Other protocols
@@ -215,11 +222,10 @@ Optional custom error show function, called from \SimpleSAML\Error\Error::show, 
 
 Example code for this function, which implements the same functionality as \SimpleSAML\Error\Error::show, looks something like:
 
-    public static function show(\SimpleSAML\Configuration $config, array $data)
-    {
-        $t = new \SimpleSAML\XHTML\Template($config, 'error.twig', 'errors');
+    public static function show(\SimpleSAML\Configuration $config, array $data) {
+        $t = new \SimpleSAML\XHTML\Template($config, 'error.php', 'errors');
         $t->data = array_merge($t->data, $data);
-        $t->send();
+        $t->show();
         exit;
     }
 

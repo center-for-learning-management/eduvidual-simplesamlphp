@@ -10,11 +10,12 @@ namespace SimpleSAML\Test\Utils;
 class ExitTestException extends \Exception
 {
     /** @var array */
-    private array $testResult;
+    private $testResult;
 
 
     /**
      * @param array $testResult
+     * @return void
      */
     public function __construct(array $testResult)
     {

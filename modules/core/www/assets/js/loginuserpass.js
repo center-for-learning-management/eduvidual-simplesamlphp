@@ -1,12 +1,7 @@
-ready(function () {
-    var button = document.getElementById("submit_button");
-    button.onclick = function () {
-        this.innerHTML = button.getAttribute("data-processing");
-        this.disabled = true;
-
-        var form = document.getElementById("f");
-        form.submit();
-        return true;
-    };
+$(document).ready(function () {
+    $('#submit_button').on('click', function () {
+        $(this).attr('disabled', 'disabled');
+        $(this).html($(this).data('processing'));
+        $(this).parents('form').submit();
+    });
 });
-

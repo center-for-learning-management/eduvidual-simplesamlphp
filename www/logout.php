@@ -1,20 +1,11 @@
 <?php
 
-declare(strict_types=1);
-
-namespace SimpleSAML;
-
-use SimpleSAML\XHTML\Template;
-
-use function array_key_exists;
-
 require_once('_include.php');
 
-$config = Configuration::getInstance();
-$httpUtils = new Utils\HTTP();
+$config = \SimpleSAML\Configuration::getInstance();
 
 if (array_key_exists('link_href', $_REQUEST)) {
-    $link = $httpUtils->checkURLAllowed($_REQUEST['link_href']);
+    $link = \SimpleSAML\Utils\HTTP::checkURLAllowed($_REQUEST['link_href']);
 } else {
     $link = 'index.php';
 }
@@ -25,7 +16,8 @@ if (array_key_exists('link_text', $_REQUEST)) {
     $text = '{logout:default_link_text}';
 }
 
-$t = new Template($config, 'logout.twig');
+$t = new \SimpleSAML\XHTML\Template($config, 'logout.php');
 $t->data['link'] = $link;
 $t->data['text'] = $text;
-$t->send();
+$t->show();
+exit();

@@ -33,19 +33,19 @@ Examples
 
 Default attributes:
 
-    'authproc' => [
-        50 => [
+    'authproc' => array(
+        50 => array(
             'class' => 'core:GenerateGroups',
-        ],
-    ],
+        ),
+    ),
 
 Custom attributes:
 
-    'authproc' => [
-        50 => [
+    'authproc' => array(
+        50 => array(
             'class' => 'core:GenerateGroups',
             'someAttribute',
             'someOtherAttribute',
-        ],
-    ],
+        ),
+    ),
 

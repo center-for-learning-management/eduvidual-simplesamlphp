@@ -10,7 +10,10 @@
     {%- if not isProduction %}
 
     <div class="message-box warning">
-      {% trans %}You are now accessing a pre-production system. This authentication setup is for testing and pre-production verification only. If someone sent you a link that pointed you here, and you are not <i>a tester</i> you probably got the wrong link, and should <b>not be here</b>.{% endtrans %}
+      {% trans %}You are now accessing a pre-production system. This authentication setup
+      {#- #} is for testing and pre-production verification only. If someone sent you
+      {#- #} a link that pointed you here, and you are not <i>a tester</i> you
+      {#- #} probably got the wrong link, and should <b>not be here</b>.{% endtrans %}
     </div>
     {% endif -%}
     {% if errorcode -%}
@@ -38,7 +41,7 @@
     <p>{{ 'A service has requested you to authenticate yourself. Please enter your username and password in the form below.'|trans }}</p>
     <br>
     <div class="center">
-        <form id="f" class="pure-form pure-form-aligned center-form" action="{{ moduleURL('core/loginuserpass', {'AuthState': AuthState}) }}" method="post" name="f">
+        <form class="pure-form pure-form-aligned center-form" action="?" method="post" name="f">
             <div class="form-align">
 
                 <div class="pure-control-group">
@@ -104,6 +107,10 @@
 
             </div> <!-- form-align-->
             <br><br>
+            {%- for name, value in stateparams %}
+
+            <input type="hidden" name="{{ name }}" value="{{ value }}">
+            {%- endfor %}
 
             <button class="pure-button pure-button-red pure-input-1-2 pure-input-sm-1-1 right" id="submit_button"
                     type="submit" tabindex="6" data-processing="{% trans %}Processing...{% endtrans %}">
@@ -111,7 +118,7 @@
             </button>
         </form>
     </div><!--center-->
-    {% if links is defined -%}
+    {% if links -%}
     <ul>
         {% for link in links -%}
         <li><a href="{{ link.href }}">{{ link['text']|trans }}</a></li>

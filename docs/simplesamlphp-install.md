@@ -1,7 +1,15 @@
 SimpleSAMLphp Installation and Configuration
 ============================================
 
-[TOC]
+<!-- 
+This file is written in Markdown syntax. 
+For more information about how to use the Markdown syntax, read here:
+http://daringfireball.net/projects/markdown/syntax
+-->
+
+
+
+<!-- {{TOC}} -->
 
 
 This document is part of the SimpleSAMLphp documentation suite.
@@ -19,9 +27,9 @@ Prerequisites
 -------------
 
  * A web server capable of executing PHP scripts.
- * PHP version >= 7.2.0.
+ * PHP version >= 7.1.0.
  * Support for the following PHP extensions:
-   * Always required: `date`, `dom`, `hash`, `intl`, `json`, `libxml`, `mbstring`, `openssl`, `pcre`, `SPL`, `zlib`
+   * Always required: `date`, `dom`, `hash`, `libxml`, `openssl`, `pcre`, `SPL`, `zlib`, `json`, `mbstring`
    * When automatically checking for latest versions, and used by some modules: `cURL`
    * When authenticating against an LDAP server: `ldap`
    * When authenticating against a RADIUS server: `radius`
@@ -203,7 +211,7 @@ look like this:
         location ^~ /simplesaml {
             alias /var/simplesamlphp/www;
 
-            location ~^(?<prefix>/simplesaml)(?<phpfile>.+?\.php)(?<pathinfo>/.*)?$ {
+            location ~ ^(?<prefix>/simplesaml)(?<phpfile>.+?\.php)(?<pathinfo>/.*)?$ {
                 include          fastcgi_params;
                 fastcgi_pass     $fastcgi_pass;
                 fastcgi_param SCRIPT_FILENAME $document_root$phpfile;
@@ -320,23 +328,34 @@ can do that in the configuration:
 
 Set to `true` the modules you want to enable, and to `false` those that you want to disable.
 
-Prior to SSP V2 you could enable or disable modules by setting empty files with names (`enable`, `disable`,
-`default-enable`) in the module's root directory. You need to now use the `module.enable` config option.
+Alternatively, you can enable or disable modules by setting empty files with given names in the module's root 
+directory. For example, in order to enable the _consent_ module: 
+
+```
+    cd modules/consent
+    touch enable
+```
+
+If you later want to disable the module, you can rename the `enable` file to `disable`.
+
+```
+    cd modules/consent
+    mv enable disable
+```
+
+This is the traditional way of enabling and disabling modules, but it is **deprecated**. Please do not rely on this in
+new installations of the software.
 
 
-The SimpleSAMLphp admin interface
----------------------------------
+The SimpleSAMLphp installation web page
+---------------------------------------
 
-After installing SimpleSAMLphp, you can access the homepage of your installation, which by default does
-not show much information:
+After installing SimpleSAMLphp, you can access the homepage of your installation, which contains some information and
+a few links to the test services. The URL of an installation can be e.g.:
 
     https://service.example.org/simplesaml/
 
 The exact URL depends on how you set it up with your web server, and of course on your hostname.
-If this works, you can now also acceas the admin module by adding `admin/` to your base URL:
-
-    https://service.example.org/simplesaml/admin/
-
 
 **Warning**: before you can actually use SimpleSAMLphp for something useful, you need to configure it either as a 
 Service Provider or as an Identity Provider, depending on your use case.
@@ -347,7 +366,7 @@ Here is an example screenshot of what the SimpleSAMLphp page looks like:
 
 ### Check your PHP environment
 
-At the bottom of the admin page there are some green lights. SimpleSAMLphp runs some tests to see whether the
+At the bottom of the installation page there are some green lights. SimpleSAMLphp runs some tests to see whether the 
 required and recommended prerequisites are met. If any of the lights are red, you may have to install some PHP 
 extensions or external PHP packages (e.g. you need the PHP LDAP extension to use the LDAP authentication module).
 
@@ -375,7 +394,7 @@ in a separate document.
    + [Remote SP reference](simplesamlphp-reference-sp-remote)
    + [Setting up an IdP for Google Workspace (G Suite / Google Apps)](simplesamlphp-googleapps)
    + [Advanced Topics](simplesamlphp-idp-more)
- - [Automated Metadata Management](/docs/contrib_modules/metarefresh/simplesamlphp-automated_metadata)
+ - [Automated Metadata Management](https://github.com/simplesamlphp/simplesamlphp-module-metarefresh/blob/master/docs/simplesamlphp-automated_metadata.md)
  - [Maintenance and configuration](simplesamlphp-maintenance)
 
 

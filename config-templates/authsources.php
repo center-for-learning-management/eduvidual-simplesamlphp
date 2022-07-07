@@ -22,7 +22,8 @@ $config = [
     ],
 
 
-    // An authentication source which can authenticate against SAML 2.0 IdPs.
+    // An authentication source which can authenticate against both SAML 2.0
+    // and Shibboleth 1.3 IdPs.
     'default-sp' => [
         'saml:SP',
 

@@ -4,7 +4,7 @@ Implementing custom username/password authentication
 This is a step-by-step guide for creating a custom username/password [authentication source](./simplesamlphp-authsource) for SimpleSAMLphp.
 An authentication source is responsible for authenticating the user, typically by getting a username and password, and looking it up in some sort of database.
 
-[TOC]
+<!-- {{TOC}} -->
 
 Create a custom module
 ----------------------
@@ -19,7 +19,13 @@ First we need to create the module directory:
     cd modules
     mkdir mymodule
 
-Since this is a custom module, it should always be enabled in the configuration.
+Since this is a custom module, it should always be enabled.
+Therefore we create a `default-enable` file in the module.
+We do that by copying the `default-enable` file from the `core` module.
+
+    cd mymodule
+    cp ../core/default-enable .
+
 Now that we have our own module, we can move on to creating an authentication source.
 
 
@@ -120,7 +126,7 @@ In that file you should locate the `auth`-option for your IdP, and change it to 
 
     <?php
     /* ... */
-    $metadata['https://example.org/saml-idp'] = [
+    $metadata['__DYNAMIC:1__'] = [
         /* ... */
         /*
          * Authentication source to use. Must be one that is configured in
@@ -270,7 +276,7 @@ The class follows:
             }
             $this->password = $config['password'];
             if (isset($config['options']) {
-                if (!is_array($config['options'])) {
+                if (!is_array($config['options])) {
                     throw new Exception('Missing or invalid options option in config.');
                 }
                 $this->options = $config['options'];

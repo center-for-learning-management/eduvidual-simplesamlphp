@@ -29,7 +29,7 @@ Enabling HoK SSO Profile on the IdP
 
 To enable the IdP to send HoK assertions you must add the `saml20.hok.assertion` option to the `saml20-idp-hosted` metadata file:
 
-    $metadata['https://example.org/saml-idp'] = [
+    $metadata['__DYNAMIC:1__'] = [
         [....]
         'auth' => 'example-userpass',
         'saml20.hok.assertion' => TRUE,
@@ -64,12 +64,12 @@ In general, this should look like the following code:
 	'AssertionConsumerService' => array (
 		[
 			'Binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST',
-			'Location' => 'https://sp.example.org/simplesaml/module.php/saml/sp/assertionConsumerService/default-sp',
+			'Location' => 'https://sp.example.org/simplesaml/module.php/saml/sp/saml2-acs.php/default-sp',
 			'index' => 0,
 		],
 		[
 			'Binding' => 'urn:oasis:names:tc:SAML:2.0:profiles:holder-of-key:SSO:browser',
-			'Location' => 'https://sp.example.org/simplesaml/module.php/saml/sp/assertionConsumerService/default-sp',
+			'Location' => 'https://sp.example.org/simplesaml/module.php/saml/sp/saml2-acs.php/default-sp',
 			'index' => 4,
 		],
 	),

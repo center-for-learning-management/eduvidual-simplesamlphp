@@ -1,7 +1,15 @@
 Setting up a SimpleSAMLphp SAML 2.0 IdP to use with Google Workspace (G Suite / Google Apps) for Education
 ============================================
 
-[TOC]
+<!-- 
+	This file is written in Markdown syntax. 
+	For more information about how to use the Markdown syntax, read here:
+	http://daringfireball.net/projects/markdown/syntax
+-->
+
+
+
+<!-- {{TOC}} -->
 
 SimpleSAMLphp news and documentation
 ------------------------------------
@@ -28,6 +36,7 @@ In this example we will setup this server as an IdP for Google Workspace:
 Edit `config.php`, and enable the SAML 2.0 IdP:
 
     'enable.saml20-idp' => true,
+    'enable.shib13-idp' => false,
 
 ## Setting up a signing certificate
 
@@ -67,7 +76,7 @@ The next step is to configure the way users authenticate on your IdP. Various mo
 `exampleauth:Static`
 : Automatically log in as a user with a set of attributes.
 
-[`ldap:LDAP`](/docs/contrib_modules/ldap/ldap.html)
+[`ldap:LDAP`](./ldap:ldap)
 : Authenticates an user to a LDAP server.
 
 For more authentication modules, see [SimpleSAMLphp Identity Provider QuickStart](simplesamlphp-idp).
@@ -122,20 +131,18 @@ If you want to setup a SAML 2.0 IdP for Google Workspace, you need to configure 
 
 This is the configuration of the IdP itself. Here is some example config:
 
-```php
-// The SAML entity ID is the index of this config.
-$metadata['https://example.org/saml-idp'] => [
-
-    // The hostname of the server (VHOST) that this SAML entity will use.
-    'host' => '__DEFAULT__',
-
-    // X.509 key and certificate. Relative to the cert directory.
-    'privatekey'   => 'googleworkspaceidp.pem',
-    'certificate'  => 'googleappsidp.crt',
-
-    'auth' => 'example-userpass',
-]
-```
+	// The SAML entity ID is the index of this config. Dynamic:X will automatically generate an entity ID (recommended)
+	$metadata['__DYNAMIC:1__'] => [
+		
+		// The hostname of the server (VHOST) that this SAML entity will use.
+		'host'				=>	'__DEFAULT__',
+		
+		// X.509 key and certificate. Relative to the cert directory.
+		'privatekey'   => 'googleworkspaceidp.pem',
+		'certificate'  => 'googleappsidp.crt',
+		
+		'auth' => 'example-userpass',
+	]
 
 **Note**: You can only have one entry in the file with host equal to `__DEFAULT__`, therefore you should replace the existing entry with this one, instead of adding this entry as a new entry in the file. 
 
@@ -148,19 +155,13 @@ In the `saml20-sp-remote.php` file we will configure an entry for Google Workspa
        * This example shows an example config that works with Google Workspace (G Suite / Google Apps) for education.
        * What is important is that you have an attribute in your IdP that maps to the local part of the email address
        * at Google Workspace. E.g. if your google account is foo.com, and you have a user with email john@foo.com, then you
-       * must properly configure the saml:AttributeNameID authproc-filter with the name of an attribute that for this user has the value of 'john'.
+       * must set the simplesaml.nameidattribute to be the name of an attribute that for this user has the value of 'john'.
        */
       $metadata['https://www.google.com/a/g.feide.no'] => [
         'AssertionConsumerService'   => 'https://www.google.com/a/g.feide.no/acs', 
         'NameIDFormat'               => 'urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress',
-        'simplesaml.attributes'      => false,
-        'authproc'                   => [
-          1 => [
-            'saml:AttributeNameID',
-            'attribute' => 'uid',
-            'format' => 'urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress',
-          ],
-        ],
+        'simplesaml.nameidattribute' => 'uid',
+        'simplesaml.attributes'      => false
       ];
 
 You must also map some attributes received from the authentication module into email field sent to Google Workspace. In this example, the  `uid` attribute is set.  When you later configure the IdP to connect to a LDAP directory or some other authentication source, make sure that the `uid` attribute is set properly, or you can configure another attribute to use here. The `uid` attribute contains the local part of the user name.

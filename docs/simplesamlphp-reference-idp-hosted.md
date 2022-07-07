@@ -1,9 +1,10 @@
 IdP hosted metadata reference
 =============================
 
-[TOC]
+<!-- {{TOC}} -->
 
-This is a reference for the metadata file `metadata/saml20-idp-hosted.php`.
+This is a reference for the metadata files
+`metadata/saml20-idp-hosted.php` and `metadata/shib13-idp-hosted.php`.
 Both files have the following format:
 
     <?php
@@ -18,17 +19,9 @@ Both files have the following format:
     ];
     /* ... */
 
-The entity ID must be a URI, that is unlikely to change for technical or
-political reasons. We recommend it to be a domain name you own.
-The URL does not have to resolve to actual content, it's
-just an identifier. If your organization's domain is `example.org`:
-
-    https://example.org/saml-idp
-
-For guidance in picking an entityID, see
-[InCommon's best practice](https://spaces.at.internet2.edu/display/federation/saml-metadata-entityid)
-on the matter.
-
+The entity ID should be an URI. It can, also be on the form
+`__DYNAMIC:1__`, `__DYNAMIC:2__`, `...`. In that case, the entity ID
+will be generated automatically.
 
 The `host` option is the hostname of the IdP, and will be used to
 select the correct configuration. One entry in the metadata-list can
@@ -48,7 +41,8 @@ Common options
     the [authentication processing filter manual](simplesamlphp-authproc).
 
 `certificate`
-:   Location of certificate data which should be used by this IdP, in PEM format.
+:   Certificate file which should be used by this IdP, in PEM format.
+    The filename is relative to the `cert/`-directory.
 
 `contacts`
 :	Specify contacts in addition to the technical contact configured through config/config.php.
@@ -90,30 +84,50 @@ Common options
 `logouttype`
 :   The logout handler to use. Either `iframe` or `traditional`. `traditional` is the default.
 
-`OrganizationName`, `OrganizationDisplayName`, `OrganizationURL`
-:   The name and URL of the organization responsible for this IdP.
-    You need to either specify _all three_ or none of these options.
-
-:   The Name does not need to be suitable for display to end users, the DisplayName should be.
-    The URL is a website the user can access for more information about the organization.
+`OrganizationName`
+:   The name of the organization responsible for this IdP.
+    This name does not need to be suitable for display to end users.
 
 :   This option can be translated into multiple languages by specifying the value as an array of language-code to translated name:
 
         'OrganizationName' => [
-            'en' => 'Voorbeeld Organisatie Foundation b.a.',
-            'nl' => 'Stichting Voorbeeld Organisatie b.a.',
-        ],
-        'OrganizationDisplayName' => [
             'en' => 'Example organization',
-            'nl' => 'Voorbeeldorganisatie',
-        ],
-        'OrganizationURL' => [
-            'en' => 'https://example.com',
-            'nl' => 'https://example.com/nl',
+            'no' => 'Eksempel organisation',
         ],
 
+:   *Note*: If you specify this option, you must also specify the `OrganizationURL` option.
+
+`OrganizationDisplayName`
+:   The name of the organization responsible for this IdP.
+    This name must be suitable for display to end users.
+    If this option isn't specified, `OrganizationName` will be used instead.
+
+:   This option can be translated into multiple languages by specifying the value as an array of language-code to translated name.
+
+:   *Note*: If you specify this option, you must also specify the `OrganizationName` option.
+
+`OrganizationURL`
+:   A URL the end user can access for more information about the organization.
+
+:   This option can be translated into multiple languages by specifying the value as an array of language-code to translated URL.
+
+:   *Note*: If you specify this option, you must also specify the `OrganizationName` option.
+
+`privacypolicy`
+:   This is an absolute URL for where an user can find a
+    privacypolicy. If set, this will be shown on the consent page.
+    `%SPENTITYID%` in the URL will be replaced with the entity id of
+    the service the user is accessing.
+
+:   Note that this option also exists in the SP-remote metadata, and
+    any value in the SP-remote metadata overrides the one configured
+    in the IdP metadata.
+
+:   *Note*: **deprecated** Will be removed in a future release; use the MDUI-extension instead
+
 `privatekey`
-:   Location of private key data for this IdP, in PEM format.
+:   Name of private key file for this IdP, in PEM format. The filename
+    is relative to the `cert/`-directory.
 
 `privatekey_pass`
 :   Passphrase for the private key. Leave this option out if the
@@ -124,6 +138,14 @@ Common options
     The scopes will be added to the generated XML metadata.
     A scope can either be a domain name or a regular expression
     matching a number of domains.
+
+`userid.attribute`
+:   The attribute name of an attribute which uniquely identifies
+    the user. This attribute is used if SimpleSAMLphp needs to generate
+    a persistent unique identifier for the user. This option can be set
+    in both the IdP-hosted and the SP-remote metadata. The value in the
+    SP-remote metadata has the highest priority. The default value is
+    `eduPersonPrincipalName`.
 
 
 SAML 2.0 options
@@ -167,7 +189,7 @@ The following SAML 2.0 options are available:
     2.  IdP Hosted Metadata
 
 :   The default value is:
-    `urn:oasis:names:tc:SAML:2.0:attrname-format:uri`
+    `urn:oasis:names:tc:SAML:2.0:attrname-format:basic`
 
 :   Some examples of values specified in the SAML 2.0 Core
     Specification:
@@ -175,7 +197,7 @@ The following SAML 2.0 options are available:
 :   -   `urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified`
 
     -   `urn:oasis:names:tc:SAML:2.0:attrname-format:uri` (The default
-        in Shibboleth 2.0, mandatory as per SAML2INT)
+        in Shibboleth 2.0)
 
     -   `urn:oasis:names:tc:SAML:2.0:attrname-format:basic` (The
         default in Sun Access Manager)
@@ -185,6 +207,8 @@ The following SAML 2.0 options are available:
 :   Note that this option also exists in the SP-remote metadata, and
     any value in the SP-remote metadata overrides the one configured
     in the IdP metadata.
+
+:   (This option was previously named `AttributeNameFormat`.)
 
 `encryption.blacklisted-algorithms`
 :   Blacklisted encryption algorithms. This is an array containing the algorithm identifiers.
@@ -332,11 +356,6 @@ The following SAML 2.0 options are available:
 
 `validate.authnrequest`
 :   Whether we require signatures on authentication requests sent to this IdP.
-    Set it to:
-
-    true: authnrequest must be signed (and signature will be validated)
-    null: authnrequest may be signed, if it is, signature will be validated
-    false: authnrequest signature is never checked
 
 :   Note that this option also exists in the SP-remote metadata, and
     any value in the SP-remote metadata overrides the one configured
@@ -377,6 +396,30 @@ messages from that SP.
      'redirect.sign' => true,
 
 
+Shibboleth 1.3 options
+----------------------
+
+Note that Shibboleth 1.3 support is deprecated and will be removed in the next major release of SimpleSAMLphp.
+
+The following options for Shibboleth 1.3 IdP's are avaiblable:
+
+`scopedattributes`
+:   Array with names of attributes which should be scoped. Scoped
+    attributes will receive a `Scope`-attribute on the
+    `AttributeValue`-element. The value of the Scope-attribute will
+    be taken from the attribute value:
+
+:   `<AttributeValue>someuser@example.org</AttributeValue>`
+
+:   will be transformed into
+
+:   `<AttributeValue Scope="example.org">someuser</AttributeValue>`
+
+:   By default, no attributes are scoped. Note that this option also
+    exists in the SP-remote metadata, and any value in the SP-remote
+    metadata overrides the one configured in the IdP metadata.
+
+
 Metadata extensions
 -------------------
 
@@ -387,21 +430,20 @@ See the documentation for those extensions for more details:
   * [MDRPI extension](./simplesamlphp-metadata-extensions-rpi)
   * [EntityAttributes](./simplesamlphp-metadata-extensions-attributes)
 
-For other metadata extensions, you can use the `saml:Extensions` option:
-
-`saml:Extensions`
-:   An array of `\SAML2\XML\Chunk`s to include in the IdP metadata extensions, at the same level as `EntityAttributes`.
 
 Examples
 --------
 
 These are some examples of IdP metadata
 
-### Minimal SAML 2.0 IdP ###
+### Minimal SAML 2.0 / Shibboleth 1.3 IdP ###
 
     <?php
-
-    $metadata['https://example.org/saml-idp'] = [
+    /*
+     * We use the '__DYNAMIC:1__' entity ID so that the entity ID
+     * will be autogenerated.
+     */
+    $metadata['__DYNAMIC:1__'] = [
         /*
          * We use '__DEFAULT__' as the hostname so we won't have to
          * enter a hostname.
@@ -418,40 +460,3 @@ These are some examples of IdP metadata
          */
         'auth' => 'example-userpass',
     ];
-
-### A custom metadata extension (eduGAIN republish request) ###
-
-```
-<?php
-
-$dom = \SAML2\DOMDocumentFactory::create();
-$republishRequest = $dom->createElementNS('http://eduid.cz/schema/metadata/1.0', 'eduidmd:RepublishRequest');
-$republishTarget = $dom->createElementNS('http://eduid.cz/schema/metadata/1.0', 'eduidmd:RepublishTarget', 'http://edugain.org/');
-$republishRequest->appendChild($republishTarget);
-$ext = [new \SAML2\XML\Chunk($republishRequest)];
-
-$metadata['https://example.org/saml-idp'] = [
-    'host' => '__DEFAULT__',
-    'certificate' => 'example.org.crt',
-    'privatekey' => 'example.org.pem',
-    'auth' => 'example-userpass',
-
-    /*
-     * The custom metadata extensions.
-     */
-    'saml:Extensions' => $ext,
-];
-```
-
-this generates the following metadata:
-
-```
-<EntityDescriptor entityID="...">
-  <Extensions xmlns="urn:oasis:names:tc:SAML:2.0:metadata">
-    <eduidmd:RepublishRequest xmlns:eduidmd="http://eduid.cz/schema/metadata/1.0">
-      <eduidmd:RepublishTarget>http://edugain.org/</eduidmd:RepublishTarget>
-    </eduidmd:RepublishRequest>
-  </Extensions>
-  <!-- rest of metadata -->
-</EntityDescriptor>
-```
