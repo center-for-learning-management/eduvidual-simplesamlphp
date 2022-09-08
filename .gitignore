@@ -10,6 +10,7 @@
 /www/assets/css/*.css.LICENSE.txt
 !/www/assets/css/post.css
 /www/assets/css/*.map
+/www/assets/js/post.js
 .phpunit.result.cache
 
 !/config/.gitkeep
